@@ -6,6 +6,7 @@ import Section5 from '@/components/section-5-embodiments'
 import Section6 from '@/components/section-6-pyramid'
 import Section7 from '@/components/section-7-team'
 import Section8 from '@/components/section-8-roadmap'
+import Footer from '@/components/footer'
 
 export default function HomePage() {
   return (
@@ -18,6 +19,7 @@ export default function HomePage() {
       <Section6 />
       <Section7 />
       <Section8 />
+      <Footer />
     </div>
   )
 }
