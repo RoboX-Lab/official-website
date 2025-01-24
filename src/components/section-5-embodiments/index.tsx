@@ -87,7 +87,7 @@ function PcImages({ activeIndex }: { activeIndex: number }) {
             src={image}
             alt="robot"
             className={cn(
-              'h-auto w-full scale-100 object-contain opacity-50 transition-all duration-300',
+              'duration-30 h-auto w-full scale-100 object-contain opacity-50 transition-all ease-in-out',
               activeIndex === index ? 'scale-[1.1] opacity-100' : ''
             )}
           />
