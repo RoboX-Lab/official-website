@@ -8,10 +8,12 @@ import data from './data'
 
 export default function Section() {
   const [activeTab, setActiveTab] = useState('virtual')
+  const [activeIndex, setActiveIndex] = useState(0)
   const containerRef = useRef(null)
   const headerRef = useRef(null)
   const realContentRef = useRef(null)
   const virtualContentRef = useRef(null)
+  const listItemRefs = useRef<(HTMLLIElement | null)[]>([])
 
   const isRealInView = useInView(realContentRef, { amount: 0.5 })
 
@@ -25,6 +27,34 @@ export default function Section() {
   })
 
   const headerY = useTransform(scrollYProgress, [0, 1], ['0%', '-100%'])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (headerRef.current) {
+        const headerHeight = (headerRef.current as HTMLElement).offsetHeight
+        const scrollPosition = window.scrollY + headerHeight + 4 * 24 // 4 lines of text (assuming 24px line height)
+
+        let closestIndex = 0
+        let minDistance = Infinity
+
+        listItemRefs.current.forEach((item, index) => {
+          if (item) {
+            const itemTop = item.offsetTop
+            const distance = Math.abs(scrollPosition - itemTop)
+            if (distance < minDistance) {
+              minDistance = distance
+              closestIndex = index
+            }
+          }
+        })
+
+        setActiveIndex(closestIndex)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const scrollToContent = (tab: string) => {
     const targetRef = tab === 'real' ? realContentRef : virtualContentRef
@@ -60,14 +90,28 @@ export default function Section() {
         <ArrowIcon className="mx-auto my-5 size-9 text-primary-dark" />
       </motion.div>
 
-      <div className="relative">
-        <div ref={virtualContentRef}>
-          <VirtualContent activeTab={activeTab} />
-        </div>
-        <div ref={realContentRef}>
-          <RealContent activeTab={activeTab} />
-        </div>
-      </div>
+      <ul className="relative">
+        <li ref={virtualContentRef} />
+        {data.virtual.map((item, index) => (
+          <TextItem
+            key={'virtual-' + index}
+            text={item}
+            index={index}
+            isActive={activeTab === 'virtual' && index === activeIndex}
+            ref={(el) => (listItemRefs.current[index] = el)}
+          />
+        ))}
+        <li ref={realContentRef} />
+        {data.real.map((item, index) => (
+          <TextItem
+            key={'real-' + index}
+            text={item}
+            index={index}
+            isActive={activeTab === 'real' && index === activeIndex}
+            ref={(el) => (listItemRefs.current[index] = el)}
+          />
+        ))}
+      </ul>
     </div>
   )
 }
@@ -97,26 +141,34 @@ function Tabs({ activeTab, onSelect }: { activeTab: string; onSelect: (tab: stri
   )
 }
 
-function RealContent({ activeTab }: { activeTab: string }) {
+function TextItem({
+  text,
+  isActive,
+  ref
+}: {
+  text: string
+  index: number
+  isActive: boolean
+  ref: React.Ref<HTMLLIElement>
+}) {
   return (
-    <ul className={cn('transition-all duration-500', activeTab === 'real' ? 'text-white' : 'text-gray-300')}>
-      {data.real.map((item, index) => (
-        <li key={'real-' + index} className="mt-6 text-base leading-8">
-          {item}
-        </li>
-      ))}
-    </ul>
-  )
-}
-
-function VirtualContent({ activeTab }: { activeTab: string }) {
-  return (
-    <ul className={cn('transition-all duration-500', activeTab === 'virtual' ? 'text-white' : 'text-gray-300')}>
-      {data.virtual.map((item, index) => (
-        <li key={activeTab + '-' + index} className="mt-6 text-base leading-8">
-          {item}
-        </li>
-      ))}
-    </ul>
+    <motion.li
+      ref={ref}
+      className={cn(
+        'mt-6 text-base leading-8 transition-all duration-300',
+        isActive ? 'text-2xl font-bold' : 'text-base opacity-50'
+      )}
+      initial={false}
+      animate={{
+        scale: isActive ? 1.2 : 1,
+        opacity: isActive ? 1 : 0.5
+      }}
+      transition={{
+        duration: 0.3,
+        ease: 'easeOut'
+      }}
+    >
+      {text}
+    </motion.li>
   )
 }

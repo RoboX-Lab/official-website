@@ -1,7 +1,9 @@
-import Robot1 from '@/assets/robot-1.svg?react'
-import Robot2 from '@/assets/robot-2.svg?react'
 import { cn } from '@udecode/cn'
 import { forwardRef, useEffect, useRef, useState } from 'react'
+
+import Robot1 from '@/assets/robot-1.svg?react'
+import Robot2 from '@/assets/robot-2.svg?react'
+import BigStar from '@/assets/big-star.svg?react'
 
 export default function Section() {
   const [leftLineHeight, setLeftLineHeight] = useState(0)
@@ -55,7 +57,10 @@ export default function Section() {
             <HLine ref={bottomLeftLineRef} className="flex-1" />
           </div>
           <Rect className="mr-3" />
-          <Robot1 className="mx-auto h-full w-auto" preserveAspectRatio="xMidYMid meet" width={236 / 361 + 'em'} />
+          <div className="relative h-full">
+            <Robot1 className="mx-auto h-full w-auto" preserveAspectRatio="xMidYMid meet" width={236 / 361 + 'em'} />
+            <BigStar className="absolute right-[-20%] top-[-5%] h-full w-auto" />
+          </div>
           <Rect className="invisible ml-3" />
           <div className="invisible relative flex-1">
             <HLine className="flex-1" />
