@@ -13,7 +13,6 @@ export default function Section() {
   useEffect(() => {
     if (playerRef.current) {
       playerRef.current.subscribeToStateChange((state) => {
-        console.log(state.paused, state.ended)
         setPaused(state.paused && !state.ended)
       })
     }
@@ -25,7 +24,7 @@ export default function Section() {
         ref={(player) => {
           playerRef.current = player
         }}
-        src="/b6a9-202201221823.mp4"
+        src="https://s.r6d9.ai/static/b6a9-202201221823.mp4"
         poster={videoCover}
         aspectRatio="16:9"
       >

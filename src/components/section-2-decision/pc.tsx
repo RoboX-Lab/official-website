@@ -30,9 +30,6 @@ export default function Section() {
 
       setWidth(point2.left - point1.left)
       setHeight(point1.top - point3.top + 1)
-
-      console.log('height', point1.top - point3.top)
-      console.log('width', point2.left - point1.left)
     }
   }
 
