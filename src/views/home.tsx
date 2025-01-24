@@ -10,7 +10,7 @@ import Footer from '@/components/footer'
 
 export default function HomePage() {
   return (
-    <div>
+    <div className="snap-y snap-mandatory">
       {/* <Header /> */}
       <Section1 />
       <Section2 />

@@ -6,7 +6,7 @@ import Logo from '../logo'
 
 export default function Section() {
   return (
-    <div className="flex h-screen flex-col justify-between border-t-0 bg-gradient-radial from-[#2A2523] to-[black]">
+    <div className="flex h-screen snap-start flex-col justify-between border-t-0 bg-gradient-radial from-[#2A2523] to-[black]">
       <Header />
       <div className="section flex min-h-0 w-full flex-1 flex-col items-center justify-between border-t-0">
         <div></div>
