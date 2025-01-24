@@ -11,6 +11,7 @@ import Footer from '@/components/footer'
 export default function HomePage() {
   return (
     <div>
+      {/* <Header /> */}
       <Section1 />
       <Section2 />
       <Section3 />

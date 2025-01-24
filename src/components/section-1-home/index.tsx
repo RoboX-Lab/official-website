@@ -1,17 +1,20 @@
-import Header from './header'
 import Footer from './footer'
 import Progress from './progress'
+import Header from '@/components/header'
 
 import Logo from '../logo'
 
 export default function Section() {
   return (
-    <div className="section flex h-screen flex-col justify-between bg-gradient-radial from-[#2A2523] to-[black]">
+    <div className="flex h-screen flex-col justify-between border-t-0 bg-gradient-radial from-[#2A2523] to-[black]">
       <Header />
-      <Circle />
-      <div>
-        <Progress />
-        <Footer />
+      <div className="section flex min-h-0 w-full flex-1 flex-col items-center justify-between border-t-0">
+        <div></div>
+        <Circle />
+        <div className="w-full">
+          <Progress />
+          <Footer />
+        </div>
       </div>
     </div>
   )
