@@ -9,7 +9,7 @@ export default function Footer() {
   const screen = useScreen()
 
   return (
-    <div className="section min-h-0 border-t-0">
+    <div className="section min-h-0 border-t-0 py-0">
       <div className="flex flex-col items-center gap-5 py-10 text-base font-bold leading-8 md:flex-row md:justify-between md:text-xl">
         {screen.width < 768 && <Links />}
         <p>Follow @ffs_DeSci</p>
