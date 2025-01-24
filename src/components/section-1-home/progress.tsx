@@ -6,7 +6,7 @@ export default function Progress() {
   const { progress } = useProgressControl(3000)
 
   return (
-    <div className="mt-10 space-y-1">
+    <div className="mt-10 space-y-1 md:mx-auto md:w-[800px]">
       <div className="flex items-center justify-between px-2 text-sm">
         <span>depolyment in progress ...</span>
         <span>{progress}%</span>

@@ -36,13 +36,13 @@ const Logo: React.FC<LogoProps> = ({
           height="472"
           rx="4"
           stroke={actualBorderColor}
-          stroke-width="24"
+          strokeWidth="24"
           mask="url(#path-1-inside-1_29576_31250)"
         />
-        <g clip-path="url(#clip0_29576_31250)">
+        <g clipPath="url(#clip0_29576_31250)">
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M293.746 286.86L315.742 226.427L304.571 163.099L263.24 113.836L202.806 91.8398L139.478 103.01L90.2153 144.342L68.2194 204.775L293.746 286.86ZM239.395 185.959C232.973 203.605 213.462 212.703 195.817 206.28C178.172 199.858 169.074 180.347 175.496 162.702C181.919 145.057 201.429 135.959 219.075 142.381C236.72 148.803 245.818 168.314 239.395 185.959Z"
             fill={foregroundColor}
           />
