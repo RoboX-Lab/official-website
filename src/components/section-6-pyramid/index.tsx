@@ -28,10 +28,10 @@ const data = [
 
 export default function Section() {
   return (
-    <div className="section flex flex-col items-center py-10 text-center">
-      <h2 className="mb-16 text-3xl font-bold text-primary-light">Data Pyramid</h2>
-      <PlusIcon className="mt-20 size-8 text-primary-dark" />
-      <div className="relative z-0 my-3 mt-[70px] flex aspect-[640/560] w-full flex-col items-center text-sm">
+    <div className="section flex flex-col items-center py-10 text-center md:h-screen md:py-[120px]">
+      <h2 className="h2">Data Pyramid</h2>
+      <PlusIcon className="mt-20 size-8 text-primary-dark md:hidden" />
+      <div className="relative z-0 my-3 mt-[70px] flex aspect-[640/560] w-full flex-col items-center text-sm md:w-[640px]">
         <Pyramid className="pointer-events-none absolute top-0 z-20 mx-auto size-full" width={640} height={560} />
         {data.map((item, index) => (
           <Item key={item.image + index} {...item} />
