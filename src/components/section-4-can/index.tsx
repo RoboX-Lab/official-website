@@ -73,10 +73,10 @@ export default function Section() {
   }
 
   return (
-    <div ref={containerRef} className="section relative pt-0 text-center">
+    <div ref={containerRef} className="section relative pt-0 text-center md:py-[120px]">
       <motion.div ref={headerRef} style={{ y: headerY }} className="sticky top-0 z-10 bg-[black] pt-6">
-        <h2 className="text-3xl font-bold text-primary-light">What Can R6D9 Do?</h2>
-        <p className="mt-6 text-base leading-8">
+        <h2 className="h2">What Can R6D9 Do?</h2>
+        <p className="mt-6 text-base leading-8 md:mt-8">
           Built by top AI researchers, engineers, and a vibrant community of ambitious contributors like you. Continuous
           learning and improving.
         </p>
@@ -118,7 +118,7 @@ export default function Section() {
 
 function Tabs({ activeTab, onSelect }: { activeTab: string; onSelect: (tab: string) => void }) {
   return (
-    <div className="mt-10 flex rounded-sm border border-[white] p-2 text-xl font-bold leading-10">
+    <div className="mt-10 flex rounded-sm border border-[white] p-2 text-xl font-bold leading-10 md:mx-auto md:mt-[60px] md:w-[310px]">
       <div
         className={cn(
           'h-10 flex-1 cursor-pointer transition-all duration-300 ease-out',

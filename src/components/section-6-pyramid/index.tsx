@@ -43,7 +43,7 @@ export default function Section() {
 
 function Item({ text, image, className }: TItemProps) {
   return (
-    <div className={`group relative flex flex-1 items-center justify-center ${className}`}>
+    <div className={`group relative flex flex-1 items-center justify-center ${className} cursor-pointer`}>
       <div className="absolute flex size-full items-end justify-center text-sm">{text}</div>
       <img
         src={image}
