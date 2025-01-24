@@ -50,14 +50,14 @@ const data: TCardProps[] = [
 export default function Section() {
   return (
     <div className="section">
-      <div className="z-10 bg-[black] pb-3 pt-10 text-center">
-        <h2 className="mb-8 text-3xl font-bold text-primary-light">Roadmap</h2>
+      <div className="z-10 bg-[black] pb-3 pt-10 text-center md:pb-[60px] md:pt-[120px]">
+        <h2 className="mb-8 text-3xl font-bold text-primary-light md:text-6xl">Roadmap</h2>
         <p className="text-base leading-8">
           Revolutionizing the Way You Interact with AI, Robots, and the World Around You
         </p>
       </div>
       <div className="flex py-10">
-        <div className="relative mr-6 w-[2px] bg-[#2B2B2B]">
+        <div className="relative mr-6 w-[2px] bg-[#2B2B2B] md:mr-[108px]">
           <div className="sticky top-[200px] h-10 rounded-full bg-gradient-to-b from-[#FFAF7C00] to-[#FF6501]"></div>
         </div>
         <div className="flex-1 space-y-20 pb-4 text-left">
