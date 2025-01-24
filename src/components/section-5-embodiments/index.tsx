@@ -9,22 +9,28 @@ import robotImage2 from '@/assets/robot-4.svg?url'
 import robotImage3 from '@/assets/robot-5.svg?url'
 import robotImage4 from '@/assets/robot-6.svg?url'
 import robotImage5 from '@/assets/robot-7.svg?url'
+import { cn } from '@udecode/cn'
 
 export default function Section() {
+  const [activeIndex] = useSwitchImage()
+
   return (
-    <div className="section py-10 text-center">
-      <h2 className="mb-16 text-3xl font-bold leading-[48px] text-primary-light">
-        A Foundation Agent Can Act in a Wide Range of Embodiments
-      </h2>
-      <p className="text-base leading-8">
-        Different Body, Different Skills,
-        <br /> Need Variety of Training Data
-      </p>
-      <CrossCircleIcon className="mx-auto mt-5 size-14 text-primary-dark" />
-      <Images />
-      <div className="relative z-10 mt-12 flex items-center py-3">
-        <div className="h-[6px] flex-1 bg-primary-dark"></div>
-        <ArrowIcon className="absolute right-0 -z-10 size-10 -rotate-90 text-primary-dark" />
+    <div className="section py-10 text-center md:flex md:flex-col md:justify-between md:py-[120px]">
+      <div>
+        <h2 className="h2 mb-16 md:mb-8">A Foundation Agent Can Act in a Wide Range of Embodiments</h2>
+        <p className="text-base leading-8 md:mb-16 md:text-lg">
+          Different Body, Different Skills,
+          <br className="md:hidden" /> Need Variety of Training Data
+        </p>
+        <CrossCircleIcon className="mx-auto mt-5 size-14 text-primary-dark" />
+      </div>
+      <div>
+        <Images activeIndex={activeIndex} />
+        <PcImages activeIndex={activeIndex} />
+        <div className="relative z-10 mt-12 flex items-center py-3">
+          <div className="h-[6px] flex-1 bg-primary-dark"></div>
+          <ArrowIcon className="absolute right-0 -z-10 size-10 -rotate-90 text-primary-dark" />
+        </div>
       </div>
     </div>
   )
@@ -32,17 +38,12 @@ export default function Section() {
 
 const images = [robotImage1, robotImage2, robotImage3, robotImage4, robotImage5]
 
-function Images() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  useInterval(() => {
-    setCurrentIndex((prev) => (prev + 1) % images.length)
-  }, 2000)
-
+function Images({ activeIndex }: { activeIndex: number }) {
   return (
-    <div className="relative mt-[70px] h-[280px] overflow-hidden">
+    <div className="relative mt-[70px] h-[280px] overflow-hidden md:hidden">
       <AnimatePresence initial={false} mode="popLayout">
         {images.map((image, index) => {
-          const position = (index - currentIndex + images.length) % images.length
+          const position = (index - activeIndex + images.length) % images.length
           const isActive = position === 0
 
           return (
@@ -75,4 +76,32 @@ function Images() {
       </AnimatePresence>
     </div>
   )
+}
+
+function PcImages({ activeIndex }: { activeIndex: number }) {
+  return (
+    <ul className="hidden items-end md:flex md:gap-[50px]">
+      {images.map((image, index) => (
+        <li key={image + index} className="relative size-full flex-1">
+          <img
+            src={image}
+            alt="robot"
+            className={cn(
+              'h-auto w-full scale-100 object-contain opacity-50 transition-all duration-300',
+              activeIndex === index ? 'scale-[1.1] opacity-100' : ''
+            )}
+          />
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+function useSwitchImage() {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  useInterval(() => {
+    setCurrentIndex((prev) => (prev + 1) % images.length)
+  }, 2000)
+
+  return [currentIndex]
 }
