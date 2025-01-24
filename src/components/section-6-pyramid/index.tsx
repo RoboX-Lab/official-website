@@ -35,7 +35,7 @@ export default function Section() {
   )
 }
 
-function Item({ text, image }: TItemProps) {
+function Item({ text }: TItemProps) {
   return (
     <div className="flex flex-1 items-center justify-center">
       <span>{text}</span>
