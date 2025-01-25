@@ -13,14 +13,25 @@ export default function HomePage() {
     <div className="snap-y snap-mandatory">
       {/* <Header /> */}
       <Section1 />
+      <HLine />
       <Section2 />
+      <HLine />
       <Section3 />
+      <HLine />
       <Section4 />
+      <HLine />
       <Section5 />
+      <HLine />
       <Section6 />
+      <HLine />
       <Section7 />
+      <HLine />
       <Section8 />
       <Footer />
     </div>
   )
+}
+
+function HLine() {
+  return <div className="h-[2px] bg-[white]"></div>
 }

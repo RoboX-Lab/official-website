@@ -34,8 +34,8 @@ export default function Section() {
   }
 
   return (
-    <div className="section relative flex flex-col pb-0 pt-10 text-center md:gap-[100px] md:py-[120px]">
-      <div className="relative z-50 flex flex-col items-center justify-start">
+    <div className="relative flex min-h-screen flex-col pb-0 text-center md:gap-[100px]">
+      <div className="relative z-50 flex flex-col items-center justify-start md:mt-[120px]">
         <h2
           className="flex w-full items-center justify-center text-6xl font-bold text-primary-light"
           style={{ width: width + 'px' }}
