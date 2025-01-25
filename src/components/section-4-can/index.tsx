@@ -30,7 +30,7 @@ export default function Section() {
   useEffect(() => {
     const unsubscribe = scrollYProgress.on('change', (latest) => {
       const totalItems = data.virtual.length + data.real.length
-      const rawIndex = Math.min(Math.floor(latest * totalItems), totalItems - 1)
+      const rawIndex = Math.min(Math.round(latest * totalItems), totalItems - 1)
 
       requestAnimationFrame(() => {
         setActiveIndex(rawIndex)
