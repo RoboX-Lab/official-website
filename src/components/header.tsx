@@ -12,11 +12,14 @@ export default function Header({ className }: { className?: string }) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className="relative text-gray-200">
-      <div className={cn('section flex min-h-0 w-full items-center justify-between border-t-0', className)}>
-        <CrossIcon className={cn('size-5 text-primary-light md:size-8', isOpen && 'invisible')} />
-        <Menu isOpen={isOpen} setIsOpen={setIsOpen} />
-      </div>
+    <div
+      className={cn(
+        'flex min-h-0 w-full items-center justify-between border-t-0 p-6 text-gray-200 md:px-[80px] md:py-10',
+        className
+      )}
+    >
+      <CrossIcon className={cn('size-5 text-primary-light md:size-8', isOpen && 'invisible')} />
+      <Menu isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   )
 }

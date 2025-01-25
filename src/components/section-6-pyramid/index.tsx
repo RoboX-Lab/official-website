@@ -14,7 +14,7 @@ type TItemProps = {
 const data = [
   {
     text: (
-      <div className="mb-1">
+      <div className="mb-2 md:mb-0 md:pt-14">
         Real-world <br />
         Robot Data
       </div>
@@ -22,8 +22,8 @@ const data = [
     image: image1,
     className: 'w-[calc(235/640*100%)]'
   },
-  { text: <div className="pb-3">Simulation Data</div>, image: image2, className: 'w-[calc(430/640*100%)]' },
-  { text: <div className="pb-7">Internet Data</div>, image: image3, className: 'w-[calc(640/640*100%)]' }
+  { text: <div className="pb-3 md:pb-0">Simulation Data</div>, image: image2, className: 'w-[calc(430/640*100%)]' },
+  { text: <div className="pb-7 md:pb-0">Internet Data</div>, image: image3, className: 'w-[calc(640/640*100%)]' }
 ]
 
 export default function Section() {
@@ -44,7 +44,7 @@ export default function Section() {
 function Item({ text, image, className }: TItemProps) {
   return (
     <div className={`group relative flex flex-1 items-center justify-center ${className} cursor-pointer`}>
-      <div className="absolute flex size-full items-end justify-center text-sm">{text}</div>
+      <div className="absolute flex size-full items-end justify-center text-sm md:items-center">{text}</div>
       <img
         src={image}
         alt=""

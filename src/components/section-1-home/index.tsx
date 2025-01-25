@@ -6,9 +6,9 @@ import Logo from '../logo'
 
 export default function Section() {
   return (
-    <div className="flex h-screen snap-start flex-col justify-between border-t-0 bg-gradient-radial from-[#2A2523] to-[black]">
+    <div className="flex min-h-screen snap-start flex-col justify-between border-t-0 bg-gradient-radial from-[#2A2523] to-[black]">
       <Header />
-      <div className="section flex min-h-0 w-full flex-1 flex-col items-center justify-between border-t-0">
+      <div className="flex min-h-0 w-full flex-1 flex-col items-center justify-between border-t-0 p-6 md:px-[80px] md:py-10">
         <div></div>
         <Circle />
         <div className="w-full">
