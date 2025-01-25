@@ -13,9 +13,9 @@ export default function Footer() {
       <div className="flex flex-col items-center gap-5 py-10 text-base font-bold leading-8 md:flex-row md:justify-between md:text-xl">
         {screen.width < 768 && <Links />}
         {/* <p>Follow @ffs_DeSci</p> */}
-        <p className="w-[200px]">Follow</p>
+        <p className="md:w-[200px]">Follow</p>
         {screen.width >= 768 && <Links />}
-        <p className="w-[200px] text-right">Join Telegram</p>
+        <p className="md:w-[200px] md:text-right">Join Telegram</p>
       </div>
     </div>
   )
