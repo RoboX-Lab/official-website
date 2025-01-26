@@ -24,7 +24,7 @@ export default function Section() {
         ref={(player) => {
           playerRef.current = player
         }}
-        src="https://s.r6d9.ai/static/b6d9-20250126-114445.mp4"
+        src="https://s.r6d9.ai/static/b6d9-20250126-152449.mp4"
         poster={videoCover}
         aspectRatio="16:9"
       >
