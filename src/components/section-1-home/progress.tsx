@@ -3,19 +3,19 @@ import { useEffect, useState } from 'react'
 import ProgressLine from '@/assets/progress-line.svg?react'
 
 export default function Progress() {
-  const { progress } = useProgressControl(3000)
+  const { progress } = useProgressControl(2000)
 
   return (
     <div className="mt-10 space-y-1 md:mx-auto md:w-[800px]">
       <div className="flex items-center justify-between px-2 text-sm">
         <span>depolyment in progress ...</span>
-        <span>{progress}%</span>
+        <span>{Math.round(progress * 0.2)}%</span>
       </div>
       <div className="w-full rounded-sm border border-[white] p-2">
         <div className="relative h-5 rounded-sm bg-[#FFFFFF1F]">
           <div
             className="h-full rounded-sm bg-gradient-to-r from-[#FFAF7C] to-[#FF6501] transition-all duration-300 ease-out"
-            style={{ width: `${progress}%` }}
+            style={{ width: `${progress * 0.2}%` }}
           ></div>
           <div className="absolute inset-0 flex items-center justify-between">
             <div></div>

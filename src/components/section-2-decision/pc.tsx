@@ -55,10 +55,10 @@ export default function Section() {
             <VLine className="absolute bottom-1 left-1/2 -translate-x-1/2" style={{ height: height + 'px' }} />
           </div>
 
-          <div className="mb-8 h-[22px] text-xl"></div>
+          <div className="invisible mb-8 h-[22px] text-xl">Embodiment Controls</div>
           <div className="relative">
             <Robot1
-              className="mx-auto h-[360px] w-auto flex-1"
+              className="mx-auto h-[350px] w-auto flex-1"
               preserveAspectRatio="xMidYMid meet"
               height={361 / 236 + 'em'}
             />

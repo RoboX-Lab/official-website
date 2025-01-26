@@ -2,7 +2,7 @@ import Footer from './footer'
 import Progress from './progress'
 import Header from '@/components/header'
 
-import Logo from '../logo'
+import Logo from '../logo.tsx'
 
 export default function Section() {
   return (
