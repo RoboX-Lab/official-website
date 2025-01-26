@@ -28,7 +28,7 @@ const data = [
 
 export default function Section() {
   return (
-    <div className="section flex flex-col items-center py-10 text-center md:h-screen md:py-[120px]">
+    <div className="section flex flex-col items-center py-10 text-center md:py-[120px]">
       <h2 className="h2">Data Pyramid</h2>
       <PlusIcon className="mt-20 size-8 text-primary-dark md:hidden" />
       <div className="relative z-0 my-3 mt-[70px] flex aspect-[640/560] w-full flex-col items-center text-sm md:w-[640px]">

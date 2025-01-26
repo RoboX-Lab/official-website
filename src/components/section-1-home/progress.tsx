@@ -6,10 +6,13 @@ export default function Progress() {
   const { progress } = useProgressControl(2000)
 
   return (
-    <div className="mt-10 space-y-1 md:mx-auto md:w-[800px]">
+    <div className="relative z-50 mt-10 space-y-1 md:mx-auto md:w-[800px]">
       <div className="flex items-center justify-between px-2 text-sm">
-        <span>depolyment in progress ...</span>
-        <span>{Math.round(progress * 0.2)}%</span>
+        <div>
+          <span className="mr-3">depolyment in progress ...</span>
+          <span className="hidden md:inline">{Math.round(progress * 0.2)}%</span>
+        </div>
+        <div className="text-lg font-bold">Browser Use</div>
       </div>
       <div className="w-full rounded-sm border border-[white] p-2">
         <div className="relative h-5 rounded-sm bg-[#FFFFFF1F]">

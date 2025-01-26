@@ -71,16 +71,20 @@ export default function Section() {
         </div>
       </div>
       <div className="relative z-10 flex flex-1 flex-col py-3">
-        <h3 className="mb-2 h-5 text-sm font-bold text-gray-1000">Embodiment Skills</h3>
-        <div className="flex min-h-0 w-full flex-1 items-center justify-center">
+        {/* <h3 className="mb-2 h-5 text-sm font-bold text-gray-1000">Embodiment Skills</h3> */}
+        <div className="relative mt-4 flex min-h-0 w-full flex-1 items-center justify-center">
           <div className="invisible relative flex-1">
             <HLine className="flex-1" />
           </div>
           <Triangle className="invisible mr-3" />
           <Robot2 className="mx-auto h-full w-auto" preserveAspectRatio="xMidYMid meet" width={231 / 351 + 'em'} />
-          <Triangle className="ml-3" />
-          <div className="relative flex-1">
+          <Triangle className="relative z-50 ml-3" />
+          <div className="relative z-50 flex-1">
             <HLine ref={bottomRightLineRef} className="flex-1" />
+          </div>
+          <div className="absolute w-screen bg-[#00000066] text-2xl font-bold leading-[38px]">
+            Embodiment Control <br />
+            Stills
           </div>
         </div>
         <div className="flex w-full justify-center pb-3 pt-5">

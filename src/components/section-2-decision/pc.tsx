@@ -55,8 +55,8 @@ export default function Section() {
             <VLine className="absolute bottom-1 left-1/2 -translate-x-1/2" style={{ height: height + 'px' }} />
           </div>
 
-          <div className="invisible mb-8 h-[22px] text-xl">Embodiment Controls</div>
-          <div className="relative">
+          {/* <div className="invisible mb-8 h-[22px] text-xl">Embodiment Controls</div> */}
+          <div className="relative my-8">
             <Robot1
               className="mx-auto h-[350px] w-auto flex-1"
               preserveAspectRatio="xMidYMid meet"
@@ -65,7 +65,7 @@ export default function Section() {
             <BigStar className="absolute right-[-20%] top-[-5%] h-full w-auto" />
           </div>
 
-          <div className="mt-8 rounded-md bg-[#FFFFFF1F] px-8 py-2 text-xl font-bold md:mt-[92px]">In Virtuals</div>
+          <div className="rounded-md bg-[#FFFFFF1F] px-8 py-2 text-xl font-bold md:mt-[92px]">In Virtuals</div>
         </div>
 
         <div className="flex flex-1 flex-col items-center">
@@ -74,15 +74,17 @@ export default function Section() {
             <VLine className="absolute bottom-1 left-1/2 -translate-x-1/2" style={{ height: height + 'px' }} />
           </div>
 
-          <div className="mb-8 h-[22px] text-xl md:text-sm md:font-bold md:text-gray-100">Embodiment Skills</div>
-          <div>
+          <div className="relative flex w-full items-center justify-center">
             <Robot2
-              className="mx-auto h-[350px] w-auto flex-1"
+              className="mx-auto my-8 h-[350px] w-auto flex-1"
               preserveAspectRatio="xMidYMid meet"
               height={360 / 240 + 'em'}
             />
+            <div className="absolute left-0 top-1/2 w-full -translate-y-1/2 bg-[#00000066] text-2xl font-bold">
+              Embodiment Controls <br /> Skills
+            </div>
           </div>
-          <div className="mt-8 rounded-md bg-[#0000001F] px-8 py-2 text-xl font-bold md:mt-[92px]">In Reals</div>
+          <div className="rounded-md bg-[#0000001F] px-8 py-2 text-xl font-bold md:mt-[92px]">In Reals</div>
         </div>
       </div>
       <div className="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-r from-[#FFAF7C] to-[#FF6501]"></div>
