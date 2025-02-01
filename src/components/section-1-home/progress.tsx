@@ -29,8 +29,8 @@ export default function Progress() {
         </div>
       </div>
       <div className="flex items-center justify-between px-2 text-base text-primary-light">
-        <span>Vituals</span>
-        <span>Reals</span>
+        <span>Vitual</span>
+        <span>Real</span>
       </div>
     </div>
   )
