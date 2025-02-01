@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import ProgressLine from '@/assets/progress-line.svg?react'
+// import ProgressLine from '@/assets/progress-line.svg?react'
 
 export default function Progress() {
   const { progress } = useProgressControl(2000)
@@ -12,7 +12,7 @@ export default function Progress() {
           <span className="mr-3">depolyment in progress ...</span>
           <span className="hidden md:inline">{Math.round(progress * 0.2)}%</span>
         </div>
-        <div className="text-lg font-bold">Browser Use</div>
+        <div className="text-lg font-bold">{progress === 100 ? 'Browser Use' : ''}</div>
       </div>
       <div className="w-full rounded-sm border border-[white] p-2">
         <div className="relative h-5 rounded-sm bg-[#FFFFFF1F]">
@@ -22,8 +22,8 @@ export default function Progress() {
           ></div>
           <div className="absolute inset-0 flex items-center justify-between">
             <div></div>
-            <ProgressLine />
-            <ProgressLine />
+            {/* <ProgressLine />
+            <ProgressLine /> */}
             <div></div>
           </div>
         </div>
