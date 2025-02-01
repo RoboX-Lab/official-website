@@ -46,7 +46,7 @@ export default function Section() {
           <Rect className="ml-3 size-2" />
           <HLine className="flex-1" />
         </h2>
-        <p className="mt-6 text-3xl font-bold text-primary-light">(Planing)</p>
+        <p className="mt-6 text-3xl font-bold text-primary-light">(Planning)</p>
       </div>
       <div className="relative z-50 flex w-full flex-1">
         <div className="flex flex-1 flex-col items-center bg-[black]">
@@ -65,7 +65,7 @@ export default function Section() {
             <BigStar className="absolute right-[-20%] top-[-5%] h-full w-auto" />
           </div>
 
-          <div className="rounded-md bg-[#FFFFFF1F] px-8 py-2 text-xl font-bold md:mt-[92px]">In Virtual</div>
+          <div className="rounded-md bg-[#FFFFFF1F] px-8 py-2 text-xl font-bold md:mt-[92px]">Virtual World</div>
         </div>
 
         <div className="flex flex-1 flex-col items-center">
@@ -84,7 +84,7 @@ export default function Section() {
               Embodiment Controls <br /> Skills
             </div>
           </div>
-          <div className="rounded-md bg-[#0000001F] px-8 py-2 text-xl font-bold md:mt-[92px]">In Real</div>
+          <div className="rounded-md bg-[#0000001F] px-8 py-2 text-xl font-bold md:mt-[92px]">Real World</div>
         </div>
       </div>
       <div className="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-r from-[#FFAF7C] to-[#FF6501]"></div>

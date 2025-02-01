@@ -19,8 +19,9 @@ export default function Section() {
       <div>
         <h2 className="h2 mb-16 md:mb-8">A Foundation Agent Can Act in a Wide Range of Embodiments</h2>
         <p className="text-base leading-8 md:mb-16 md:text-lg">
-          Different Body, Different Skills,
-          <br className="md:hidden" /> Need Variety of Training Data
+          Different Bodies, Different Skills
+          <br className="md:hidden" />
+          —All Require a Variety of Training Data.
         </p>
         <CrossCircleIcon className="mx-auto mt-5 size-14 text-primary-dark" />
       </div>

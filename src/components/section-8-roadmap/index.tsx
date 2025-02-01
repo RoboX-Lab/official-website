@@ -36,15 +36,15 @@ const data: TCardProps[] = [
       'Reward Mechanisms',
       'Ongoing Support'
     ]
-  },
-  {
-    phase: 'Future Vision',
-    date: '',
-    title: 'Scaling and Expanding Applications',
-    des: 'Launch DePin Robots for personal ownership, enabling users to earn crypto while contributing valuable data to the robotics ecosystem.',
-    checks: ['Enhanced Capabilities', 'Global Community', 'AI Ecosystem'],
-    highlight: true
   }
+  // {
+  //   phase: 'Future Vision',
+  //   date: '',
+  //   title: 'Scaling and Expanding Applications',
+  //   des: 'Launch DePin Robots for personal ownership, enabling users to earn crypto while contributing valuable data to the robotics ecosystem.',
+  //   checks: ['Enhanced Capabilities', 'Global Community', 'AI Ecosystem'],
+  //   highlight: true
+  // }
 ]
 
 export default function Section() {

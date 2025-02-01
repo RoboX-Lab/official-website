@@ -49,7 +49,7 @@ export default function Section() {
           <VLine style={{ height: rightLineHeight }} className="absolute -right-0.5 top-0" />
         </div>
       </h2>
-      <p className="w-full text-3xl font-bold text-primary-light">(Planing)</p>
+      <p className="w-full text-3xl font-bold text-primary-light">(Planning)</p>
       <div className="flex flex-1 flex-col py-3">
         <h3 className="mb-2 h-5 text-sm font-bold text-gray-1000"></h3>
         <div className="flex flex-1 items-center justify-center">
@@ -67,7 +67,7 @@ export default function Section() {
           </div>
         </div>
         <div className="flex w-full justify-center pb-3 pt-5">
-          <div className="rounded-md bg-[#FFFFFF1F] px-8 py-2 text-xl font-bold">In Virtual</div>
+          <div className="rounded-md bg-[#FFFFFF1F] px-8 py-2 text-xl font-bold">Virtual World</div>
         </div>
       </div>
       <div className="relative z-10 flex flex-1 flex-col py-3">
@@ -88,7 +88,7 @@ export default function Section() {
           </div>
         </div>
         <div className="flex w-full justify-center pb-3 pt-5">
-          <div className="rounded-md bg-[#0000001F] px-8 py-2 text-xl font-bold">In Real</div>
+          <div className="rounded-md bg-[#0000001F] px-8 py-2 text-xl font-bold">Real World</div>
         </div>
         <div className="absolute left-[calc((-100vw+100%)/2)] top-0 -z-10 h-full w-screen bg-gradient-to-r from-[#FFAF7C] to-[#FF6501]"></div>
       </div>
