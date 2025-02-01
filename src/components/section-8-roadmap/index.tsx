@@ -13,9 +13,9 @@ const data: TCardProps[] = [
   {
     phase: 'Phase 1',
     date: '(Q1, 25)',
-    title: 'The Crypto-Enlightened Twitter Bot',
-    des: 'Launch a Twitter bot capable of learning, adapting, and performing purchasing using crypto tools.',
-    checks: ['Twitter Bot MVP', 'Community Interaction', 'Crypto-Powered Purchases']
+    title: 'The Crypto-Enlightened Desktop App',
+    des: 'Launch a desktop app capable of learning, adapting, and performing crypto-powered purchases.',
+    checks: ['Desktop App MVP', 'Community Interaction', 'Crypto-Powered Purchases']
   },
   {
     phase: 'Phase 2',

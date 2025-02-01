@@ -116,7 +116,7 @@ function Tabs({ activeTab, onSelect }: { activeTab: string; onSelect: (tab: stri
         )}
         onClick={() => onSelect('virtual')}
       >
-        In Virtuals
+        In Virtual
       </div>
       <div
         className={cn(
@@ -125,7 +125,7 @@ function Tabs({ activeTab, onSelect }: { activeTab: string; onSelect: (tab: stri
         )}
         onClick={() => onSelect('real')}
       >
-        In Reals
+        In Real
       </div>
     </div>
   )
