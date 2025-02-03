@@ -9,15 +9,28 @@ export default function Footer() {
   const screen = useScreen()
 
   return (
-    <div className="section min-h-0 border-t-0 py-0">
-      <div className="flex flex-col items-center gap-5 py-10 text-base font-bold leading-8 md:flex-row md:justify-between md:text-xl">
-        {screen.width < 768 && <Links />}
-        {/* <p>Follow @ffs_DeSci</p> */}
-        <p className="md:w-[200px]">Follow</p>
-        {screen.width >= 768 && <Links />}
-        <p className="md:w-[200px] md:text-right">Join Telegram</p>
+    <>
+      <div className="section min-h-0 border-t-0 bg-[white] py-6 text-center text-xl font-bold text-[black] md:py-11 md:text-2xl">
+        Join the Future of AI with <span className="text-[#FF6501]">R6D9</span>
+        <span className="mx-1 hidden text-lg md:inline md:text-xl">-</span>
+        <a
+          href="https://forms.gle/2iu7BopUTmVQf4Jy7"
+          className="block cursor-pointer underline underline-offset-8 md:inline"
+          target="_blank"
+        >
+          Early Access Application Now Open!
+        </a>
       </div>
-    </div>
+      <div className="section min-h-0 border-t-0 py-0">
+        <div className="flex flex-col items-center gap-5 py-10 text-base font-bold leading-8 md:flex-row md:justify-between md:text-xl">
+          {screen.width < 768 && <Links />}
+          {/* <p>Follow @ffs_DeSci</p> */}
+          <p className="md:w-[200px]">Follow</p>
+          {screen.width >= 768 && <Links />}
+          <p className="md:w-[200px] md:text-right">Join Telegram</p>
+        </div>
+      </div>
+    </>
   )
 }
 

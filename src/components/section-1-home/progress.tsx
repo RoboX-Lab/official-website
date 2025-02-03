@@ -11,7 +11,7 @@ export default function Progress() {
         <div />
         <div
           className={cn(
-            'bg-[#FFFFFF] p-[2px] text-sm font-bold text-[#1C1C26] transition-opacity duration-300 ease-out',
+            'bg-[#FFFFFF] px-1 py-[2px] text-sm font-bold text-[#1C1C26] transition-opacity duration-300 ease-out',
             isHover && progress === 100 ? 'opacity-100' : 'opacity-0'
           )}
         >
@@ -31,7 +31,7 @@ export default function Progress() {
             )}
           >
             <div className="absolute -bottom-2 w-[200px] translate-x-[-100px] text-center">
-              <div className="mx-auto text-lg font-bold">Web Bot</div>
+              <div className="mx-auto text-lg font-bold">R6D9-Virtual</div>
               <Triangle className="mx-auto -rotate-90" />
               <div className="mx-auto h-9 w-[2px] bg-[white]"></div>
             </div>
