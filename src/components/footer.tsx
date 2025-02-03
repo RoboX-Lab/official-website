@@ -15,7 +15,7 @@ export default function Footer() {
         <span className="mx-1 hidden text-lg md:inline md:text-xl">-</span>
         <a
           href="https://forms.gle/2iu7BopUTmVQf4Jy7"
-          className="block cursor-pointer underline underline-offset-8 md:inline"
+          className="block cursor-pointer underline underline-offset-8 hover:underline md:inline md:no-underline"
           target="_blank"
         >
           Early Access Application Now Open!
