@@ -1,34 +1,52 @@
+import { cn } from '@udecode/cn'
 import { useEffect, useState } from 'react'
-
-// import ProgressLine from '@/assets/progress-line.svg?react'
 
 export default function Progress() {
   const { progress } = useProgressControl(2000)
+  const [isHover, setIsHover] = useState(false)
 
   return (
-    <div className="relative z-50 mt-10 space-y-1 md:mx-auto md:w-[800px]">
-      <div className="flex items-center justify-between px-2 text-sm">
-        <div>
-          <span className="mr-3">depolyment in progress ...</span>
-          <span className="hidden md:inline">{Math.round(progress * 0.2)}%</span>
+    <div className="relative z-50 mt-10 md:mx-auto md:w-[800px]">
+      <div className="flex items-center justify-between p-2 text-sm">
+        <div />
+        <div
+          className={cn(
+            'bg-[#FFFFFF] p-[2px] text-sm font-bold text-[#1C1C26] transition-opacity duration-300 ease-out',
+            isHover && progress === 100 ? 'opacity-100' : 'opacity-0'
+          )}
+        >
+          <span className="pr-5">Phase 1</span> Q1,25
         </div>
-        <div className="text-lg font-bold">{progress === 100 ? 'Browser Use' : ''}</div>
       </div>
-      <div className="w-full rounded-sm border border-[white] p-2">
-        <div className="relative h-5 rounded-sm bg-[#FFFFFF1F]">
+      <div className="w-full rounded-sm border border-[white] px-2">
+        <div className="my-2 flex h-5 items-center rounded-sm bg-[#FFFFFF1F]">
           <div
             className="h-full rounded-sm bg-gradient-to-r from-[#FFAF7C] to-[#FF6501] transition-all duration-300 ease-out"
             style={{ width: `${progress * 0.2}%` }}
           ></div>
-          <div className="absolute inset-0 flex items-center justify-between">
-            <div></div>
-            {/* <ProgressLine />
-            <ProgressLine /> */}
-            <div></div>
+          <div
+            className={cn(
+              'relative h-full transition-opacity duration-300 ease-out',
+              progress === 100 ? 'opacity-100' : 'opacity-0'
+            )}
+          >
+            <div className="absolute -bottom-2 w-[200px] translate-x-[-100px] text-center">
+              <div className="mx-auto text-lg font-bold">Web Bot</div>
+              <Triangle className="mx-auto -rotate-90" />
+              <div className="mx-auto h-9 w-[2px] bg-[white]"></div>
+            </div>
           </div>
+          <div
+            className={cn(
+              'h-full flex-1 cursor-pointer rounded-sm bg-gradient-to-r from-[#D2E7FF] to-[#ECF5FF] shadow-md transition-all duration-300 ease-out',
+              progress === 100 ? 'opacity-80' : 'opacity-0'
+            )}
+            onMouseEnter={() => setIsHover(true)}
+            onMouseLeave={() => setIsHover(false)}
+          ></div>
         </div>
       </div>
-      <div className="flex items-center justify-between px-2 text-base text-primary-light">
+      <div className="mt-1 flex items-center justify-between px-2 text-base text-primary-light">
         <span>Vitual</span>
         <span>Real</span>
       </div>
@@ -68,4 +86,15 @@ function useProgressControl(duration: number) {
   const resetProgress = () => setProgress(0)
 
   return { progress, resetProgress }
+}
+
+function Triangle({ className }: { className?: string }) {
+  return (
+    <div
+      className={cn(
+        `h-0 w-0 border-[8px] border-l-0 border-solid border-b-[transparent] border-r-[white] border-t-[transparent]`,
+        className
+      )}
+    ></div>
+  )
 }
