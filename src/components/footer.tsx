@@ -10,7 +10,7 @@ export default function Footer() {
 
   return (
     <>
-      <div className="section min-h-0 border-t-0 bg-[white] py-6 text-center text-xl font-bold text-[black] md:py-11 md:text-2xl">
+      <div className="border-t-0 bg-[white] py-6 text-center text-xl font-bold text-[black] md:py-11 md:text-2xl">
         Join the Future of AI with <span className="text-[#FF6501]">R6D9</span>
         <span className="mx-1 hidden text-lg md:inline md:text-xl">-</span>
         <a
