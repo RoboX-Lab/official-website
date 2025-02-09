@@ -16,27 +16,27 @@ const data: TCardProps[] = [
     title: 'The Crypto-Enlightened Desktop App',
     des: 'Launch a desktop app capable of learning, adapting, and performing crypto-powered purchases.',
     checks: ['Desktop App MVP', 'Community Interaction', 'Crypto-Powered Purchases']
-  },
-  {
-    phase: 'Phase 2',
-    date: '(Q2, 25)',
-    title: 'Embodied Robots in Shared Spaces',
-    des: 'Introduce a collaborative environment with multiple Embodied Robots performing physical tasks based on user commands via the Twitter bot.',
-    checks: ['Robot Deployment', 'Command Integration', 'Task Versatility', 'Performance Metrics']
-  },
-  {
-    phase: 'Phase 3',
-    date: '(Q3, 25)',
-    title: 'Home Ownership and Decentralized Contributions',
-    des: 'Launch DePin Robots for personal ownership, enabling users to earn crypto while contributing valuable data to the robotics ecosystem.',
-    checks: [
-      'Robot Pre-Orders',
-      'Data Contribution System',
-      'Labelling Platform Partnership',
-      'Reward Mechanisms',
-      'Ongoing Support'
-    ]
   }
+  // {
+  //   phase: 'Phase 2',
+  //   date: '(Q2, 25)',
+  //   title: 'Embodied Robots in Shared Spaces',
+  //   des: 'Introduce a collaborative environment with multiple Embodied Robots performing physical tasks based on user commands via the Twitter bot.',
+  //   checks: ['Robot Deployment', 'Command Integration', 'Task Versatility', 'Performance Metrics']
+  // },
+  // {
+  //   phase: 'Phase 3',
+  //   date: '(Q3, 25)',
+  //   title: 'Home Ownership and Decentralized Contributions',
+  //   des: 'Launch DePin Robots for personal ownership, enabling users to earn crypto while contributing valuable data to the robotics ecosystem.',
+  //   checks: [
+  //     'Robot Pre-Orders',
+  //     'Data Contribution System',
+  //     'Labelling Platform Partnership',
+  //     'Reward Mechanisms',
+  //     'Ongoing Support'
+  //   ]
+  // }
   // {
   //   phase: 'Future Vision',
   //   date: '',
@@ -56,14 +56,27 @@ export default function Section() {
           Revolutionizing the Way You Interact with AI, Robots, and the World Around You
         </p>
       </div>
-      <div className="flex py-10 md:pb-0">
-        <div className="relative mr-6 w-[2px] bg-[#2B2B2B] md:mr-[108px]">
-          <div className="sticky top-[200px] h-10 rounded-full bg-gradient-to-b from-[#FFAF7C00] to-[#FF6501]"></div>
-        </div>
+      <div className="flex rounded-lg bg-[#FFFFFF0A] px-6 pb-4 pt-10 md:justify-center md:pb-8 md:pt-[60px]">
+        {/* <div className="relative mr-6 w-[2px] bg-[#2B2B2B] md:mr-[108px]"> */}
+        {/* <div className="sticky top-[200px] h-10 rounded-full bg-gradient-to-b from-[#FFAF7C00] to-[#FF6501]"></div> */}
+        {/* </div> */}
         <div className="flex-1 space-y-20 pb-4 text-left">
           {data.map((item, index) => (
             <Card key={index} {...item} />
           ))}
+        </div>
+      </div>
+      <div className="my-10 flex items-center justify-center gap-5 md:my-[60px]">
+        <div className="flex items-center gap-1">
+          <span className="block size-2 bg-[#FFE9D0]"></span>
+          <span className="block size-2 bg-[#FFA769]"></span>
+          <span className="block size-2 bg-[#FF6501]"></span>
+        </div>
+        <div className="text-2xl font-bold">MORE TO COME</div>
+        <div className="flex items-center gap-1">
+          <span className="block size-2 bg-[#FF6501]"></span>
+          <span className="block size-2 bg-[#FFA769]"></span>
+          <span className="block size-2 bg-[#FFE9D0]"></span>
         </div>
       </div>
     </div>
@@ -72,7 +85,7 @@ export default function Section() {
 
 function Card({ phase, date, title, des, checks, highlight }: TCardProps) {
   return (
-    <div className="text-base font-normal">
+    <div className="text-base font-normal md:mx-auto md:w-[710px]">
       <div className="flex items-center justify-between">
         <div
           className={`rounded-full ${highlight ? 'bg-primary-light' : 'bg-primary-dark'} px-3 py-1 font-bold text-gray-1000`}
