@@ -1,0 +1,76 @@
+import { cn } from '@udecode/cn'
+import React from 'react'
+
+interface LogoProps {
+  backgroundColor?: string
+  foregroundColor?: string
+  borderColor?: string
+  className?: string
+}
+
+const Logo: React.FC<LogoProps> = ({
+  backgroundColor = '#000000',
+  foregroundColor = '#FF6501',
+  borderColor,
+  className
+}) => {
+  const actualBorderColor = borderColor || backgroundColor
+
+  return (
+    <div className={cn('aspect-[380/473] w-[160px]', className)}>
+      <svg
+        width="380"
+        height="473"
+        viewBox="0 0 380 473"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="size-full"
+      >
+        <mask id="path-1-inside-1_29576_31250" fill="white">
+          <rect y="0.330566" width="380" height="472" rx="4" />
+        </mask>
+        <rect y="0.330566" width="380" height="472" rx="4" fill={backgroundColor} />
+        <rect
+          y="0.330566"
+          width="380"
+          height="472"
+          rx="4"
+          stroke={actualBorderColor}
+          strokeWidth="24"
+          mask="url(#path-1-inside-1_29576_31250)"
+        />
+        <g clipPath="url(#clip0_29576_31250)">
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M310.001 263.703V199.391L277.845 143.703L222.157 111.547L157.845 111.547L102.157 143.703L70.001 199.391L70.001 263.703H310.001ZM224.418 187.476C224.418 206.254 209.196 221.476 190.418 221.476C171.641 221.476 156.418 206.254 156.418 187.476C156.418 168.699 171.641 153.476 190.418 153.476C209.196 153.476 224.418 168.699 224.418 187.476Z"
+            fill={foregroundColor}
+          />
+        </g>
+        <path
+          d="M73 396.331H89V412.331H73V396.331ZM73 380.331H89V396.331H73V380.331ZM73 364.331H89V380.331H73V364.331ZM73 348.331H89V364.331H73V348.331ZM73 332.331H89V348.331H73V332.331ZM89 332.331H105V348.331H89V332.331ZM105 332.331H121V348.331H105V332.331ZM105 348.331H121V364.331H105V348.331ZM89 364.331H105V380.331H89V364.331ZM105 380.331H121V396.331H105V380.331ZM105 396.331H121V412.331H105V396.331Z"
+          fill={foregroundColor}
+        />
+        <path
+          d="M167 332.331H183V348.331H167V332.331ZM151 332.331H167V348.331H151V332.331ZM135 332.331H151V348.331H135V332.331ZM135 348.331H151V364.331H135V348.331ZM135 364.331H151V380.331H135V364.331ZM135 380.331H151V396.331H135V380.331ZM135 396.331H151V412.331H135V396.331ZM151 396.331H167V412.331H151V396.331ZM167 396.331H183V412.331H167V396.331ZM167 380.331H183V396.331H167V380.331ZM167 364.331H183V380.331H167V364.331ZM151 364.331H167V380.331H151V364.331Z"
+          fill={foregroundColor}
+        />
+        <path
+          d="M197 332.331H213V348.331H197V332.331ZM197 348.331H213V364.331H197V348.331ZM197 364.331H213V380.331H197V364.331ZM197 380.331H213V396.331H197V380.331ZM197 396.331H213V412.331H197V396.331ZM213 332.331H229V348.331H213V332.331ZM229 348.331H245V364.331H229V348.331ZM229 364.331H245V380.331H229V364.331ZM229 380.331H245V396.331H229V380.331ZM213 396.331H229V412.331H213V396.331Z"
+          fill={foregroundColor}
+        />
+        <path
+          d="M259 332.331H275V348.331H259V332.331ZM275 332.331H291V348.331H275V332.331ZM291 332.331H307V348.331H291V332.331ZM291 348.331H307V364.331H291V348.331ZM291 364.331H307V380.331H291V364.331ZM291 380.331H307V396.331H291V380.331ZM291 396.331H307V412.331H291V396.331ZM275 396.331H291V412.331H275V396.331ZM259 396.331H275V412.331H259V396.331ZM259 348.331H275V364.331H259V348.331ZM259 364.331H275V380.331H259V364.331ZM275 364.331H291V380.331H275V364.331Z"
+          fill={foregroundColor}
+        />
+        <defs>
+          <clipPath id="clip0_29576_31250">
+            <rect width="260" height="260" fill="white" transform="translate(60 60.3306)" />
+          </clipPath>
+        </defs>
+      </svg>
+    </div>
+  )
+}
+
+export default Logo
