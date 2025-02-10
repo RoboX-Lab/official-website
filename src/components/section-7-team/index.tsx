@@ -13,13 +13,13 @@ export default function Section() {
       <h2 className="h2 mb-16">Team</h2>
       <div className="flex-1 md:flex md:flex-col md:items-center md:justify-center">
         <div className="md:flex md:items-center md:py-12">
-          <div className="md:flex md:items-center md:gap-9">
+          <a className="md:flex md:items-center md:gap-9" href="https://roboxlab.xyz/" target="_blank">
             <RXLOGOIcon className="mx-auto h-[112px] w-[147px]" width="1em" height={112 / 147 + 'em'} />
             <div>
               <h3 className="mt-6 text-4xl font-bold leading-[56px] md:mt-0">RoboX Lab</h3>
               <p className="mt-1 text-base leading-8 md:mt-4">(led by Christ, PhD@CMU)</p>
             </div>
-          </div>
+          </a>
           <motion.div
             animate={arrowAnimation}
             transition={{ repeat: Infinity, duration: 1.5 }}
