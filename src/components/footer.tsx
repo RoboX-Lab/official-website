@@ -4,18 +4,27 @@ import { useScreen } from 'usehooks-ts'
 import TwitterIcon from '@/assets/icons/twitter-icon.svg?react'
 import IdLNtyBAmIcon from '@/assets/icons/idLNtyBAm-icon.svg?react'
 import NoteIcon from '@/assets/icons/note-icon.svg?react'
+import { useState } from 'react'
 
 export default function Footer() {
   const screen = useScreen()
+  const [show, setShow] = useState(true)
 
   return (
     <>
-      <div className="border-t-0 bg-[white] py-6 text-center text-xl font-bold text-[black] md:py-11 md:text-2xl">
-        Join the Future of AI with <span className="text-[#FF6501]">R6D9</span>
+      <div
+        className={cn(
+          'sticky inset-x-0 bottom-0 border-t-0 bg-[#FFFFFF1F] py-5 text-center text-lg font-bold text-[white] md:py-10 md:text-2xl',
+          show ? '' : 'hidden'
+        )}
+        onClick={() => setShow(false)}
+      >
+        <span className="hidden md:inline">Join the Future of AI with </span>
+        <span className="hidden text-[#FF6501] md:inline">R6D9</span>
         <span className="mx-1 hidden text-lg md:inline md:text-xl">-</span>
         <a
           href="https://forms.gle/2iu7BopUTmVQf4Jy7"
-          className="block cursor-pointer text-lg underline underline-offset-8 hover:underline md:inline md:text-2xl md:no-underline"
+          className="block cursor-pointer text-lg no-underline underline-offset-8 hover:underline md:inline md:text-2xl md:no-underline"
           target="_blank"
         >
           Early Access Application Now Open!
