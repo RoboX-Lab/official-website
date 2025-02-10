@@ -5,7 +5,7 @@ import ArrowDownCircleIcon from '@/assets/icons/arrow-down-circle-icon.svg?react
 
 export default function Footer({ className }: { className?: string }) {
   return (
-    <div className={cn('mt-8 flex items-center justify-between', className)}>
+    <div className={cn('mt-[72px] flex items-center justify-between', className)}>
       <PlusIcon className="size-5 text-primary-light md:size-8" />
       <ArrowDownCircleIcon className="size-5 md:size-8" />
     </div>
