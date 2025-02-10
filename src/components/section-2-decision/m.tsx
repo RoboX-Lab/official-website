@@ -84,7 +84,7 @@ export default function Section() {
           </div>
           <div className="absolute w-screen bg-[#00000066] text-2xl font-bold leading-[38px]">
             Embodiment Control <br />
-            Stills
+            Skills
           </div>
         </div>
         <div className="flex w-full justify-center pb-3 pt-5">
