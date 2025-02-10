@@ -34,7 +34,7 @@ export default function Section() {
       const rawIndex = Math.min(Math.round(latest * (totalItems + 3)), totalItems - 1)
 
       requestAnimationFrame(() => {
-        // setActiveIndex(rawIndex)
+        setActiveIndex(rawIndex)
       })
     })
 
@@ -76,8 +76,8 @@ export default function Section() {
         <Tabs
           activeTab={activeTab}
           onSelect={(tab) => {
-            // setActiveTab(tab)
-            // scrollToContent(tab)
+            setActiveTab(tab)
+            scrollToContent(tab)
           }}
         />
         <ArrowIcon className="mx-auto my-5 size-9 text-primary-dark" />
@@ -124,8 +124,7 @@ function Tabs({ activeTab, onSelect }: { activeTab: string; onSelect: (tab: stri
       <div
         className={cn(
           'drop-shadow-[0_0_0_rgba(105, 188, 255, 0.5)] h-10 flex-1 cursor-not-allowed bg-gradient-to-r from-[#D2E7FF] to-[#ECF5FF] opacity-50 transition-all duration-300 ease-out',
-          // activeTab === 'real' ? 'bg-[white] text-[black]' : 'text-white'
-          'flex items-center justify-center text-[black]'
+          activeTab === 'real' ? 'bg-[white] text-[black]' : 'text-white'
         )}
         onClick={() => {
           onSelect('real')

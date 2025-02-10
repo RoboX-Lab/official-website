@@ -78,7 +78,7 @@ export default function Section() {
 }
 
 function Tabs({ activeTab, onSelect }: { activeTab: string; onSelect: (tab: string) => void }) {
-  const [timestamp, setTimestamp] = useState(Date.now())
+  const [timestamp, setTimestamp] = useState(0)
 
   return (
     <div className="mt-10 flex rounded-sm border border-[white] p-2 text-xl font-bold leading-10 md:mx-auto md:mt-[60px] md:w-[310px]">
