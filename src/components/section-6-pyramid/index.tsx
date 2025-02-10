@@ -14,9 +14,13 @@ type TItemProps = {
 const data = [
   {
     text: (
+      // <div className="md:pt-14">
+      //   Real-world <br />
+      //   Robot Data
+      // </div>
       <div className="md:pt-14">
         Real-world <br />
-        Robot Data
+        Data
       </div>
     ),
     image: image1,

@@ -3,6 +3,7 @@ import { easeInOut, easeOut, motion, useScroll, useTransform } from 'motion/reac
 import { cn } from '@udecode/cn'
 
 import ArrowIcon from '@/assets/icons/arrow-down-icon.svg?react'
+import LockIcon from '@/assets/icons/lock-icon.svg?react'
 
 import data from './data'
 
@@ -33,7 +34,7 @@ export default function Section() {
       const rawIndex = Math.min(Math.round(latest * (totalItems + 3)), totalItems - 1)
 
       requestAnimationFrame(() => {
-        setActiveIndex(rawIndex)
+        // setActiveIndex(rawIndex)
       })
     })
 
@@ -75,8 +76,8 @@ export default function Section() {
         <Tabs
           activeTab={activeTab}
           onSelect={(tab) => {
-            setActiveTab(tab)
-            scrollToContent(tab)
+            // setActiveTab(tab)
+            // scrollToContent(tab)
           }}
         />
         <ArrowIcon className="mx-auto my-5 size-9 text-primary-dark" />
@@ -107,6 +108,8 @@ export default function Section() {
 }
 
 function Tabs({ activeTab, onSelect }: { activeTab: string; onSelect: (tab: string) => void }) {
+  const [timestamp, setTimestamp] = useState(Date.now())
+
   return (
     <div className="mt-10 flex rounded-sm border border-[white] p-2 text-xl font-bold leading-10 md:mx-auto md:mt-[60px] md:w-[310px]">
       <div
@@ -120,13 +123,19 @@ function Tabs({ activeTab, onSelect }: { activeTab: string; onSelect: (tab: stri
       </div>
       <div
         className={cn(
-          'h-10 flex-1 cursor-pointer transition-all duration-300 ease-out',
-          activeTab === 'real' ? 'bg-[white] text-[black]' : 'text-white'
+          'drop-shadow-[0_0_0_rgba(105, 188, 255, 0.5)] h-10 flex-1 cursor-not-allowed bg-gradient-to-r from-[#D2E7FF] to-[#ECF5FF] opacity-50 transition-all duration-300 ease-out',
+          // activeTab === 'real' ? 'bg-[white] text-[black]' : 'text-white'
+          'flex items-center justify-center text-[black]'
         )}
-        onClick={() => onSelect('real')}
+        onClick={() => {
+          onSelect('real')
+          setTimestamp(Date.now())
+        }}
       >
+        <LockIcon className="mr-[6px]" />
         Real
       </div>
+      <Toast timestamp={timestamp} />
     </div>
   )
 }
@@ -166,3 +175,28 @@ const TextItem = forwardRef<
 })
 
 TextItem.displayName = 'TextItem'
+
+const Toast = ({ timestamp }: { timestamp: number }) => {
+  const [isVisible, setIsVisible] = useState(false)
+
+  const showToast = () => {
+    setIsVisible(true)
+    setTimeout(() => setIsVisible(false), 2000)
+  }
+
+  useEffect(() => {
+    if (timestamp) {
+      showToast()
+    }
+  }, [timestamp])
+
+  return (
+    <>
+      {isVisible && (
+        <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg border border-[#00000010] bg-[white] px-4 py-3 text-sm text-[#1C1C26] shadow-lg">
+          Coming soon...
+        </div>
+      )}
+    </>
+  )
+}
