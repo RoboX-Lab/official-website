@@ -34,12 +34,36 @@ export default function Section() {
       const rawIndex = Math.min(Math.round(latest * (totalItems + 3)), totalItems - 1)
 
       requestAnimationFrame(() => {
-        setActiveIndex(rawIndex)
+        // setActiveIndex(rawIndex)
       })
     })
 
     return () => unsubscribe()
   }, [scrollYProgress])
+
+  useEffect(() => {
+    if (activeIndex >= data.virtual.length) {
+      setActiveTab('real')
+    } else {
+      setActiveTab('virtual')
+    }
+  }, [activeIndex])
+
+  const scrollToContent = (tab: string) => {
+    const targetRef = tab === 'real' ? realContentRef : virtualContentRef
+
+    if (targetRef.current && headerRef.current) {
+      const element = targetRef.current as HTMLElement
+      const headerElement = headerRef.current as HTMLElement
+      const headerHeight = headerElement.offsetHeight
+      const elementTop = element.getBoundingClientRect().top + window.scrollY
+
+      window.scrollTo({
+        top: elementTop - headerHeight,
+        behavior: 'smooth'
+      })
+    }
+  }
 
   return (
     <div ref={containerRef} className="section relative min-h-screen pt-0 text-center md:py-[120px]">
@@ -49,7 +73,13 @@ export default function Section() {
           Built by top AI researchers, engineers, and a vibrant community of ambitious contributors like you. Continuous
           learning and improving.
         </p>
-        <Tabs activeTab={activeTab} onSelect={setActiveTab} />
+        <Tabs
+          activeTab={activeTab}
+          onSelect={(tab) => {
+            // setActiveTab(tab)
+            // scrollToContent(tab)
+          }}
+        />
         <ArrowIcon className="mx-auto my-5 size-9 text-primary-dark" />
       </motion.div>
 
@@ -64,14 +94,14 @@ export default function Section() {
           />
         ))}
         <li ref={realContentRef} />
-        {/* {data.real.map((item, index) => (
+        {data.real.map((item, index) => (
           <TextItem
             key={'real-' + index}
             text={item}
-            isActive={false}
+            isActive={index + data.virtual.length === activeIndex}
             ref={(el) => (listItemRefs.current[index] = el)}
           />
-        ))} */}
+        ))}
       </ul>
     </div>
   )
@@ -94,6 +124,7 @@ function Tabs({ activeTab, onSelect }: { activeTab: string; onSelect: (tab: stri
       <div
         className={cn(
           'drop-shadow-[0_0_0_rgba(105, 188, 255, 0.5)] h-10 flex-1 cursor-not-allowed bg-gradient-to-r from-[#D2E7FF] to-[#ECF5FF] opacity-50 transition-all duration-300 ease-out',
+          // activeTab === 'real' ? 'bg-[white] text-[black]' : 'text-white'
           'flex items-center justify-center text-[black]'
         )}
         onClick={() => {

@@ -11,14 +11,14 @@ const words: { virtual: string[]; real: string[] } = {
     '... Play music on Apple Music?'
   ],
   real: [
-    // '... Make me a sandwich?',
-    // '... Break down these cardboard boxes for recycling?',
-    // "... Water my plants while I'm away?",
-    // '... Help me organize this closet?',
-    // '... Load the dishwasher',
-    // '... Fold my laundry?',
-    // '... Vacuum the living room?',
-    // '... Clean the windows?'
+    '... Make me a sandwich?',
+    '... Break down these cardboard boxes for recycling?',
+    "... Water my plants while I'm away?",
+    '... Help me organize this closet?',
+    '... Load the dishwasher',
+    '... Fold my laundry?',
+    '... Vacuum the living room?',
+    '... Clean the windows?'
   ]
 }
 
