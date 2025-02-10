@@ -81,7 +81,7 @@ export default function Section() {
               height={360 / 240 + 'em'}
             />
             <div className="absolute left-0 top-1/2 w-full -translate-y-1/2 bg-[#00000066] text-2xl font-bold">
-              Embodiment Controls <br /> Skills
+              Embodiment Control <br /> Skills
             </div>
           </div>
           <div className="rounded-md bg-[#0000001F] px-8 py-2 text-xl font-bold md:mt-[92px]">Real</div>
