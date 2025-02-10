@@ -14,7 +14,7 @@ type TItemProps = {
 const data = [
   {
     text: (
-      <div className="mb-2 md:mb-0 md:pt-14">
+      <div className="md:pt-14">
         Real-world <br />
         Robot Data
       </div>

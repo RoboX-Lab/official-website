@@ -38,7 +38,7 @@ export default function Section() {
           >
             <ArrowIcon className="h-[36px] w-[30px] rotate-0 md:-rotate-90" />
           </motion.div>
-          <p className="text-xl leading-8">[Annotation Tooling, Quality Workflow, Community Management]</p>
+          <p className="text-xl leading-8">[Providing community labelled data]</p>
         </div>
       </div>
     </div>
