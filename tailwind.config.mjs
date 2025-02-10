@@ -26,7 +26,9 @@ module.exports = {
       },
       'primary-light': {
         DEFAULT: '#FFE9D0'
-      }
+      },
+      white: '#fff',
+      black: '#000'
     },
     extend: {
       backgroundImage: {

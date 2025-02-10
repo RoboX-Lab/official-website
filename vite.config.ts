@@ -29,6 +29,12 @@ export default defineConfig({
   },
   server: {
     port: 5175,
-    host: '0.0.0.0'
+    host: '0.0.0.0',
+    proxy: {
+      '/api': {
+        target: 'https://test.r6d9.ai',
+        changeOrigin: true
+      }
+    }
   }
 })
