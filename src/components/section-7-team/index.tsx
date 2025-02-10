@@ -17,7 +17,7 @@ export default function Section() {
             <RXLOGOIcon className="mx-auto h-[112px] w-[147px]" width="1em" height={112 / 147 + 'em'} />
             <div>
               <h3 className="mt-6 text-4xl font-bold leading-[56px] md:mt-0">RoboX Lab</h3>
-              <p className="mt-1 text-base leading-8 md:mt-4">(led by Christ, PhD@CMU)</p>
+              <p className="mt-1 text-base leading-8 md:mt-4">(led by Chris, PhD@CMU)</p>
             </div>
           </a>
           <motion.div
