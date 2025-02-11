@@ -48,7 +48,7 @@ function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (isOpen: bool
         )}
         {isOpen && (
           <>
-            <div className="absolute right-0 top-full z-50 w-full border-y border-y-[#FFFFFF1F]">
+            <div className="absolute right-0 top-[68px] z-50 w-full border-y border-y-[#FFFFFF1F]">
               <ul className="section min-h-0 space-y-16 rounded-md border-t-0 bg-[black] py-6 shadow-lg">
                 {menuItems.map((item) => (
                   <li key={item.name + '-icon'} className="cursor-pointer">
