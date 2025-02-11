@@ -53,7 +53,9 @@ function Links({ className }: { className?: string }) {
     <ul className={cn('flex items-center justify-center gap-5', className)}>
       {links.map((link) => (
         <li key={link.name + '-icon'} className="cursor-pointer">
-          <a href={link.href}>{link.icon}</a>
+          <a href={link.href} target="_blank" rel="noopener noreferrer">
+            {link.icon}
+          </a>
         </li>
       ))}
     </ul>

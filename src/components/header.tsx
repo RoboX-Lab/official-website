@@ -52,7 +52,12 @@ function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (isOpen: bool
               <ul className="section min-h-0 space-y-16 rounded-md border-t-0 bg-[black] py-6 shadow-lg">
                 {menuItems.map((item) => (
                   <li key={item.name + '-icon'} className="cursor-pointer">
-                    <a href={item.url} className="flex items-center justify-between">
+                    <a
+                      href={item.url}
+                      className="flex items-center justify-between"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <div className="flex items-center justify-center">
                         {item.icon}
                         <span className="ml-2">{item.name}</span>
