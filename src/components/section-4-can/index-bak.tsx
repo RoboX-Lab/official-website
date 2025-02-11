@@ -41,6 +41,30 @@ export default function Section() {
     return () => unsubscribe()
   }, [scrollYProgress])
 
+  useEffect(() => {
+    if (activeIndex >= data.virtual.length) {
+      setActiveTab('real')
+    } else {
+      setActiveTab('virtual')
+    }
+  }, [activeIndex])
+
+  const scrollToContent = (tab: string) => {
+    const targetRef = tab === 'real' ? realContentRef : virtualContentRef
+
+    if (targetRef.current && headerRef.current) {
+      const element = targetRef.current as HTMLElement
+      const headerElement = headerRef.current as HTMLElement
+      const headerHeight = headerElement.offsetHeight
+      const elementTop = element.getBoundingClientRect().top + window.scrollY
+
+      window.scrollTo({
+        top: elementTop - headerHeight,
+        behavior: 'smooth'
+      })
+    }
+  }
+
   return (
     <div ref={containerRef} className="section relative min-h-screen pt-0 text-center md:py-[120px]">
       <motion.div ref={headerRef} style={{ y: headerY }} className="sticky top-0 z-10 bg-[black] pt-6">
@@ -49,7 +73,13 @@ export default function Section() {
           Built by top AI researchers, engineers, and a vibrant community of ambitious contributors like you. Continuous
           learning and improving.
         </p>
-        <Tabs activeTab={activeTab} onSelect={setActiveTab} />
+        <Tabs
+          activeTab={activeTab}
+          onSelect={(tab) => {
+            setActiveTab(tab)
+            scrollToContent(tab)
+          }}
+        />
         <ArrowIcon className="mx-auto my-5 size-9 text-primary-dark" />
       </motion.div>
 
@@ -64,21 +94,21 @@ export default function Section() {
           />
         ))}
         <li ref={realContentRef} />
-        {/* {data.real.map((item, index) => (
+        {data.real.map((item, index) => (
           <TextItem
             key={'real-' + index}
             text={item}
-            isActive={false}
+            isActive={index + data.virtual.length === activeIndex}
             ref={(el) => (listItemRefs.current[index] = el)}
           />
-        ))} */}
+        ))}
       </ul>
     </div>
   )
 }
 
 function Tabs({ activeTab, onSelect }: { activeTab: string; onSelect: (tab: string) => void }) {
-  const [timestamp, setTimestamp] = useState(0)
+  const [timestamp, setTimestamp] = useState(Date.now())
 
   return (
     <div className="mt-10 flex rounded-sm border border-[white] p-2 text-xl font-bold leading-10 md:mx-auto md:mt-[60px] md:w-[310px]">
@@ -94,7 +124,7 @@ function Tabs({ activeTab, onSelect }: { activeTab: string; onSelect: (tab: stri
       <div
         className={cn(
           'drop-shadow-[0_0_0_rgba(105, 188, 255, 0.5)] h-10 flex-1 cursor-not-allowed bg-gradient-to-r from-[#D2E7FF] to-[#ECF5FF] opacity-50 transition-all duration-300 ease-out',
-          'flex items-center justify-center text-[black]'
+          activeTab === 'real' ? 'bg-[white] text-[black]' : 'text-white'
         )}
         onClick={() => {
           onSelect('real')
