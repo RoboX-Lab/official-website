@@ -33,7 +33,7 @@ const menuItems = [
   {
     name: 'Docs',
     icon: <DocsIcon className="size-6" />,
-    url: ''
+    url: 'https://robox-labs.gitbook.io/r6d9/whitepaper'
   }
 ]
 
