@@ -44,7 +44,7 @@ export default function Footer() {
 }
 
 const links = [
-  { name: 'twitter', href: 'https://x.com/Roboagent69', icon: <TwitterIcon className="size-6 md:size-9" /> },
+  { name: 'twitter', href: 't.me/Roboagent69Channel', icon: <TwitterIcon className="size-6 md:size-9" /> },
   { name: 'idLNtyBAm', href: '#', icon: <IdLNtyBAmIcon className="size-6 md:size-9" /> },
   { name: 'note', href: '#', icon: <NoteIcon className="size-6 md:size-9" /> }
 ]
