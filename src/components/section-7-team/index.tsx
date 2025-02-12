@@ -30,7 +30,11 @@ export default function Section() {
           <p className="text-xl leading-8">[LLM, Agentic AI System, Sandbox]</p>
         </div>
         <div className="mt-12 md:my-12 md:mt-[120px] md:flex md:items-center">
-          <h3 className="text-4xl font-bold leading-[56px]">Codatta</h3>
+          <h3 className="text-4xl font-bold leading-[56px]">
+            <a href="https://codatta.io/" target="_blank">
+              Codatta
+            </a>
+          </h3>
           <motion.div
             animate={arrowAnimation}
             transition={{ repeat: Infinity, duration: 1.5 }}
