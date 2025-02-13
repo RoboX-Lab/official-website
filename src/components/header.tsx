@@ -25,11 +25,11 @@ export default function Header({ className }: { className?: string }) {
 }
 
 const menuItems = [
-  {
-    name: 'Github',
-    icon: <GithubIcon className="size-6" />,
-    url: 'https://github.com/orgs/RoboX-Lab'
-  },
+  // {
+  //   name: 'Github',
+  //   icon: <GithubIcon className="size-6" />,
+  //   url: 'https://github.com/orgs/RoboX-Lab'
+  // },
   {
     name: 'Docs',
     icon: <DocsIcon className="size-6" />,
