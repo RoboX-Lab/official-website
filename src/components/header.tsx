@@ -28,7 +28,7 @@ const menuItems = [
   {
     name: 'Github',
     icon: <GithubIcon className="size-6" />,
-    url: ''
+    url: 'https://github.com/orgs/RoboX-Lab'
   },
   {
     name: 'Docs',
