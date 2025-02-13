@@ -47,7 +47,11 @@ export default function Footer() {
 
 const links = [
   { name: 'twitter', href: 'https://x.com/Roboagent69', icon: <TwitterIcon className="size-6 md:size-9" /> }
-  // { name: 'idLNtyBAm', href: '#', icon: <IdLNtyBAmIcon className="size-6 md:size-9" /> },
+  // {
+  //   name: 'idLNtyBAm',
+  //   href: 'CzbsTtLTwnX81fEvNBz7bDSt8VAw43XAcdgK8Ludvirt',
+  //   icon: <IdLNtyBAmIcon className="size-6 md:size-9" />
+  // }
   // { name: 'note', href: '#', icon: <NoteIcon className="size-6 md:size-9" /> }
 ]
 function Links({ className }: { className?: string }) {

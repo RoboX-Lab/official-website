@@ -4,7 +4,7 @@ import { useState } from 'react'
 import CrossIcon from '@/assets/icons/cross-icon.svg?react'
 import MenuIcon from '@/assets/icons/menu-icon.svg?react'
 import CloseIcon from '@/assets/icons/close-icon.svg?react'
-import GithubIcon from '@/assets/icons/github-icon.svg?react'
+// import GithubIcon from '@/assets/icons/github-icon.svg?react'
 import DocsIcon from '@/assets/icons/folder-open-fill-icon.svg?react'
 import ArrowRightIcon from '@/assets/icons/arrow-right-icon.svg?react'
 
