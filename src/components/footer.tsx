@@ -14,7 +14,7 @@ export default function Footer() {
     <>
       <div
         className={cn(
-          'sticky inset-x-0 bottom-0 z-50 border-t-0 bg-[#FFFFFFB3] py-5 text-center text-lg font-bold text-[white] md:py-10 md:text-2xl',
+          'sticky inset-x-0 bottom-0 z-50 border-t-0 bg-[#000000B2] py-5 text-center text-lg font-bold text-[white] backdrop-blur md:py-10 md:text-2xl',
           show ? '' : 'hidden'
         )}
         onClick={() => setShow(false)}
