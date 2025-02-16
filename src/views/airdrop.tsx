@@ -12,8 +12,8 @@ import { Loader2 } from 'lucide-react'
 
 function LinkSolAddress() {
   return (
-    <div className="flex w-full flex-col items-center">
-      <p className="mb-3 text-center">Connect the Solana Wallet you provided before.</p>
+    <div className="mt-[96px] flex w-full flex-col items-center">
+      <p className="mb-6 text-center">Connect the Solana Wallet you provided before.</p>
       <WalletMultiButton style={{ backgroundColor: 'white', color: 'black' }}></WalletMultiButton>
     </div>
   )
@@ -24,6 +24,7 @@ function ClaimAction() {
   const wallet = useAnchorWallet()
   const [loading, setLoading] = useState(false)
   const [userClaimStatus, setUserClaimStatus] = useState<'not-eligible' | 'claimable' | 'claimed'>('claimable')
+  const [userClaimAmount, setUserClaimAmount] = useState(0)
 
   async function checkClaimStatus(publicKey: PublicKey) {
     setLoading(true)
@@ -42,6 +43,7 @@ function ClaimAction() {
     try {
       const claimState = await program.account.claimState.fetch(userPDA)
       setUserClaimStatus(claimState.claimed ? 'claimed' : 'claimable')
+      setUserClaimAmount(claimState.amount.toNumber())
     } catch (err) {
       if (err.message.includes('Account does not exist or has no data')) {
         setUserClaimStatus('not-eligible')
@@ -77,7 +79,7 @@ function ClaimAction() {
           mint
         })
         .rpc()
-      console.log(tx_hash)
+
       const confirmRes = await connection.confirmTransaction(tx_hash, 'finalized')
       console.log(confirmRes)
       await connection.confirmTransaction(tx_hash)
@@ -88,6 +90,8 @@ function ClaimAction() {
       const claimState = await program.account.claimState.fetch(userPDA)
       console.log(claimState.claimed)
       if (!claimState.claimed) return
+      setUserClaimStatus('claimed')
+      setUserClaimAmount(claimState.amount.toNumber())
     } catch (error) {
       console.error(error)
       toast.error(error.message)
@@ -117,9 +121,13 @@ function ClaimAction() {
         </button>
       )}
       {userClaimStatus === 'claimed' && (
-        <p className="mb-6 text-center text-lg">
-          You have successfully claimed. Please check your wallet for the airdrop
-        </p>
+        <>
+          <p className="mb-3 text-3xl font-bold">Congratulations!</p>
+          <p className="mb-6 block text-center text-lg">
+            {userClaimAmount / 1000000} $R6D9 has been sent to your provided Solana address <br />
+            please check your wallet
+          </p>
+        </>
       )}
     </div>
   )
