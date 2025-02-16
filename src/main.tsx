@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client'
 import Router from '@/router'
+import { Toaster } from 'react-hot-toast'
 
 import '@/styles/tailwind.css'
 import '@/styles/global.css'
@@ -15,7 +16,12 @@ if (!container) {
 initReactGA()
 
 const root = createRoot(container)
-root.render(<Router></Router>)
+root.render(
+  <>
+    <Toaster />
+    <Router></Router>
+  </>
+)
 
 function initReactGA() {
   ReactGA.initialize([

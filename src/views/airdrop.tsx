@@ -1,184 +1,177 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import ArrowDownImage from '@/assets/airdrop/arrow-down.png'
-import { useAppKit, useAppKitAccount } from '@reown/appkit/react'
-import airdrop from '@/apis/airdrop'
-import { useSignMessage } from 'wagmi'
-import { PublicKey } from '@solana/web3.js'
+import { useAnchorWallet, useWallet } from '@solana/wallet-adapter-react'
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
+import BotImage from '@/assets/airdrop/claim-bot.webp'
+import { Connection, PublicKey } from '@solana/web3.js'
+import { utils, AnchorProvider, Program } from '@coral-xyz/anchor'
+import { IDL, Airdrop } from '@/contract/idl'
+import * as spl from '@solana/spl-token'
+import toast from 'react-hot-toast'
 import { Loader2 } from 'lucide-react'
 
-function ConnectWallet(props: { onConnect: (address: string) => Promise<void>; onDisconnect: () => void }) {
-  const { onConnect, onDisconnect } = props
-  const { address, isConnected } = useAppKitAccount()
-  const [loading, setLoading] = useState(false)
-  const { open } = useAppKit()
-
-  const handleConnect = useCallback(
-    async (address: string) => {
-      setLoading(true)
-      try {
-        await onConnect(address)
-      } catch (err) {
-        console.log(err)
-      }
-      setLoading(false)
-    },
-    [onConnect]
-  )
-
-  useEffect(() => {
-    if (!isConnected) onDisconnect()
-    if (address && isConnected) handleConnect(address)
-  }, [address, handleConnect, isConnected, onDisconnect])
-
+function LinkSolAddress() {
   return (
-    <div className="text-white flex flex-col items-center">
-      <p className="mb-[120px] text-center">Please link the wallet you used on Codatta OR Aspecta.</p>
-      <button
-        disabled={loading}
-        onClick={() => open({ view: 'Connect' })}
-        className="bg-white text-black flex w-[240px] justify-center rounded-lg py-3"
-      >
-        {loading ? <Loader2 className="size-6 animate-spin" /> : 'Connect EVM Wallet'}
-      </button>
+    <div className="flex w-full flex-col items-center">
+      <p className="mb-3 text-center">Connect the Solana Wallet you provided before.</p>
+      <WalletMultiButton style={{ backgroundColor: 'white', color: 'black' }}></WalletMultiButton>
     </div>
   )
 }
 
-function LinkSolAddress(props: { onSubmit: (address: string) => Promise<void> }) {
-  const [solAddress, setSolAddress] = useState('')
-  const [canSubmit, setCanSubmit] = useState(false)
+function ClaimAction() {
+  const { publicKey } = useWallet()
+  const wallet = useAnchorWallet()
   const [loading, setLoading] = useState(false)
+  const [userClaimStatus, setUserClaimStatus] = useState<'not-eligible' | 'claimable' | 'claimed'>('claimable')
 
-  function isValidSolanaAddress(address: string): boolean {
-    try {
-      new PublicKey(address)
-      return true
-    } catch (error) {
-      console.log(error.message)
-      return false
-    }
-  }
-
-  useEffect(() => {
-    if (isValidSolanaAddress(solAddress)) {
-      setCanSubmit(true)
-    } else {
-      setCanSubmit(false)
-    }
-  }, [solAddress, props])
-
-  async function handleSubmit() {
+  async function checkClaimStatus(publicKey: PublicKey) {
     setLoading(true)
+    const rpcURL = import.meta.env.VITE_SOLANA_RPC_URL
+    const connection = new Connection(rpcURL)
+
+    if (!wallet) return
+    const provider = new AnchorProvider(connection, wallet)
+    const program = new Program(IDL as Airdrop, provider)
+
+    const [userPDA] = PublicKey.findProgramAddressSync(
+      [utils.bytes.utf8.encode('claim-states'), publicKey!.toBuffer()],
+      program.programId
+    )
+
     try {
-      await props.onSubmit(solAddress)
+      const claimState = await program.account.claimState.fetch(userPDA)
+      setUserClaimStatus(claimState.claimed ? 'claimed' : 'claimable')
     } catch (err) {
-      console.log(err)
+      if (err.message.includes('Account does not exist or has no data')) {
+        setUserClaimStatus('not-eligible')
+      } else toast(err.message)
     }
+
     setLoading(false)
   }
 
+  async function handleClaim() {
+    toast('Please connect wallet')
+    if (!publicKey || publicKey?.toString() === '') {
+      toast('Please connect wallet')
+      return
+    }
+    setLoading(true)
+    try {
+      const mint = new PublicKey(import.meta.env.VITE_SOLANA_MINT)
+      const rpcURL = import.meta.env.VITE_SOLANA_RPC_URL
+      const connection = new Connection(rpcURL)
+
+      if (!wallet) return
+      const provider = new AnchorProvider(connection, wallet)
+      const program = new Program(IDL as Airdrop, provider)
+      const [configPDA] = PublicKey.findProgramAddressSync([utils.bytes.utf8.encode('config')], program.programId)
+      const vault = spl.getAssociatedTokenAddressSync(mint, configPDA, true)
+
+      const tx_hash = await program.methods
+        .claim()
+        .accounts({
+          recipient: publicKey?.toString(),
+          vault,
+          mint
+        })
+        .rpc()
+      console.log(tx_hash)
+      const confirmRes = await connection.confirmTransaction(tx_hash, 'finalized')
+      console.log(confirmRes)
+      await connection.confirmTransaction(tx_hash)
+      const [userPDA] = PublicKey.findProgramAddressSync(
+        [utils.bytes.utf8.encode('claim-states'), publicKey!.toBuffer()],
+        program.programId
+      )
+      const claimState = await program.account.claimState.fetch(userPDA)
+      console.log(claimState.claimed)
+      if (!claimState.claimed) return
+    } catch (error) {
+      console.error(error)
+      toast.error(error.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    if (!publicKey) return
+    checkClaimStatus(publicKey)
+  }, [publicKey])
+
   return (
-    <div className="flex w-full flex-col items-center">
-      <p className="mb-3 text-center">Provide your Solana wallet address to claim the airdrop.</p>
-      <input
-        className="bg-white/5 border-white/10 mb-[60px] block w-full rounded-lg border px-8 py-3 text-center"
-        type="text"
-        placeholder="Enter your Solana wallet address"
-        onInput={(e: React.ChangeEvent<HTMLInputElement>) => setSolAddress(e.target.value)}
-      />
-      <button
-        disabled={!canSubmit || loading}
-        onClick={handleSubmit}
-        className="bg-white text-black flex w-[240px] justify-center rounded-lg py-3 transition-all disabled:opacity-20"
-      >
-        {loading ? <Loader2 className="size-6 animate-spin" /> : 'Confirm'}
-      </button>
+    <div className="flex flex-col items-center">
+      <img src={BotImage} alt="" className="mb-6" />
+      {userClaimStatus === 'not-eligible' && (
+        <p className="mb-6 text-center text-lg">Sorry, you are currently not eligible to make a claim.</p>
+      )}
+      {userClaimStatus === 'claimable' && (
+        <button
+          disabled={loading}
+          className="flex w-48 justify-center rounded-md bg-white p-3 text-black"
+          onClick={handleClaim}
+        >
+          {loading ? <Loader2 className="animate-spin" /> : 'Claim'}
+        </button>
+      )}
+      {userClaimStatus === 'claimed' && (
+        <p className="mb-6 text-center text-lg">
+          You have successfully claimed. Please check your wallet for the airdrop
+        </p>
+      )}
     </div>
   )
-}
-
-function ClaimStatus() {
-  return <div>We have received your Solana address. Please check back later for the results.</div>
 }
 
 function Steps(props: { step: 'connect-wallet' | 'link-solana' | 'claim-status' }) {
   const { step } = props
 
   return (
-    <div className="border-white mx-auto flex max-w-[754px] gap-4 rounded-[1px] border p-2 text-sm font-bold sm:text-xl">
+    <div className="mx-auto flex max-w-[508px] gap-4 rounded-[2px] border border-white p-2 text-sm font-bold sm:text-xl">
       <div
-        className={`${step === 'connect-wallet' ? 'bg-white text-black rounded-l-sm' : 'text-white bg-white/0'} relative basis-1/3 py-1 text-center transition-all`}
+        className={`${step === 'link-solana' ? 'rounded-l-sm bg-white text-black' : 'bg-white/0 text-white'} relative basis-1/2 py-1 text-center transition-all`}
       >
         Connect Wallet
         <div
-          className={` ${step === 'connect-wallet' ? 'opacity-100' : 'opacity-0'} border-white border-y-white/0 absolute right-[-10px] top-0 h-0 border-y-[calc(50%)] border-l-[10px] transition-all`}
+          className={` ${step === 'connect-wallet' ? 'opacity-100' : 'opacity-0'} absolute right-[-10px] top-0 h-0 border-y-[calc(50%)] border-l-[10px] border-white border-y-white/0 transition-all`}
         ></div>
       </div>
+
       <div
-        className={`${step === 'link-solana' ? 'bg-white text-black rounded-l-sm' : 'text-white'} relative basis-1/3 py-1 text-center transition-all`}
+        className={`${step === 'claim-status' ? 'rounded-l-sm bg-white text-black' : 'text-white'} relative basis-1/2 py-1 text-center transition-all`}
       >
-        Connect Claim Wallet
-        <div
-          className={` ${step === 'link-solana' ? 'opacity-100' : 'opacity-0'} border-white border-y-white/0 absolute right-[-10px] top-0 h-0 border-y-[calc(50%)] border-l-[10px] transition-all`}
-        ></div>
-      </div>
-      <div
-        className={`${step === 'claim-status' ? 'bg-white text-black rounded-l-sm' : 'text-white'} relative basis-1/3 py-1 text-center transition-all`}
-      >
-        Claim $Pengu
+        Claim $R6D9
       </div>
     </div>
   )
 }
 
-export default function Airdrop() {
-  const { address, isConnected } = useAppKitAccount()
-  const { signMessageAsync } = useSignMessage()
-  const [step, setStep] = useState<'connect-wallet' | 'link-solana' | 'claim-status'>('connect-wallet')
+export default function AirdropPage() {
+  const [step, setStep] = useState<'link-solana' | 'claim-status'>('link-solana')
 
-  async function handleWalletConnect(address: string) {
-    try {
-      const res = await airdrop.getAirdropInfo(address)
-      if (!res.data) setStep('link-solana')
-      else setStep('claim-status')
-    } catch (err) {
-      console.log(err.message)
-    }
-  }
-
-  async function handleSubmitSolAddress(solAddress: string) {
-    try {
-      const nonce = new Date().getTime()
-      const message = `Please sign this message to confirm your ownership of the provided address. nonce:${nonce}`
-      const signature = await signMessageAsync({ message })
-      await airdrop.linkSolAddress({ message, address: address || '', signature, sol_address: solAddress })
-      setStep('claim-status')
-    } catch (err) {
-      console.log(err)
-    }
-  }
+  const { publicKey } = useWallet()
 
   useEffect(() => {
-    if (!isConnected) setStep('connect-wallet')
-  }, [isConnected])
+    if (!publicKey) setStep('link-solana')
+    else setStep('claim-status')
+  }, [publicKey])
 
   return (
     <div className="px-5">
       <h1 className="ms:mt-[120px] mx-auto mb-[70px] mt-[60px] block max-w-[593px] text-center text-[30px] font-bold text-primary-light sm:mb-[140px] sm:text-[48px]">
-        Connect a wallet to check eligibility for Airdrop
+        Connect Solana Wallet To Claim Airdrop Now !
       </h1>
       <div className="mb-5">
         <Steps step={step} />
       </div>
-      <div className="mb-[80px] flex justify-center">
+      <div className="mb-6 flex justify-center">
         <img src={ArrowDownImage} className="h-9 w-[30px]" alt="" />
       </div>
       <div className="mx-auto flex max-w-[754px] justify-center">
-        {step === 'connect-wallet' && (
-          <ConnectWallet onConnect={handleWalletConnect} onDisconnect={() => setStep('connect-wallet')}></ConnectWallet>
-        )}
-        {step === 'link-solana' && <LinkSolAddress onSubmit={handleSubmitSolAddress} />}
-        {step === 'claim-status' && <ClaimStatus />}
+        {step === 'link-solana' && <LinkSolAddress />}
+        {step === 'claim-status' && <ClaimAction />}
       </div>
     </div>
   )

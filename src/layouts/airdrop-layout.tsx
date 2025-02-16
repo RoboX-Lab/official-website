@@ -1,54 +1,123 @@
-import { createAppKit } from '@reown/appkit/react'
-
-import { WagmiProvider } from 'wagmi'
-import { mainnet } from '@reown/appkit/networks'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
+import { clusterApiUrl } from '@solana/web3.js'
+import { WalletAdapterNetwork } from '@solana/wallet-adapter-base'
+import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react'
+import {
+  AlphaWalletAdapter,
+  AvanaWalletAdapter,
+  BitpieWalletAdapter,
+  CloverWalletAdapter,
+  Coin98WalletAdapter,
+  CoinbaseWalletAdapter,
+  CoinhubWalletAdapter,
+  FractalWalletAdapter,
+  HuobiWalletAdapter,
+  HyperPayWalletAdapter,
+  KeystoneWalletAdapter,
+  KrystalWalletAdapter,
+  LedgerWalletAdapter,
+  MathWalletAdapter,
+  NekoWalletAdapter,
+  NightlyWalletAdapter,
+  NufiWalletAdapter,
+  OntoWalletAdapter,
+  ParticleAdapter,
+  PhantomWalletAdapter,
+  SafePalWalletAdapter,
+  SaifuWalletAdapter,
+  SalmonWalletAdapter,
+  SkyWalletAdapter,
+  SolflareWalletAdapter,
+  SolongWalletAdapter,
+  SpotWalletAdapter,
+  TokenaryWalletAdapter,
+  TokenPocketWalletAdapter,
+  TorusWalletAdapter,
+  TrezorWalletAdapter,
+  TrustWalletAdapter,
+  WalletConnectWalletAdapter,
+  XDEFIWalletAdapter,
+  BitgetWalletAdapter,
+  WalletConnectWalletAdapterConfig
+} from '@solana/wallet-adapter-wallets'
+import { WalletModalProvider, WalletMultiButton } from '@solana/wallet-adapter-react-ui'
+import { useMemo } from 'react'
+import '@solana/wallet-adapter-react-ui/styles.css'
 import { Outlet } from 'react-router-dom'
 
-// 0. Setup queryClient
-const queryClient = new QueryClient()
+// function SolanaWalletConnect() {
+//   const { wallet } = useWallet()
 
-// 1. Get projectId from https://cloud.reown.com
-const projectId = '6a2d318d7237d68546b0bbd72067083d'
+//   useEffect(() => {
+//     if (!wallet) return
+//     if (wallet.readyState === WalletReadyState.Installed) wallet.adapter.connect()
+//     if (wallet.readyState === WalletReadyState.Loadable) wallet.adapter.connect()
+//     if (wallet.readyState === WalletReadyState.NotDetected) window.open(wallet.adapter.url, '_blank')
+//     if (wallet.readyState === WalletReadyState.Unsupported) window.open(wallet.adapter.url, '_blank')
+//   }, [wallet])
 
-// 2. Create a metadata object - optional
-const metadata = {
-  name: 'R6D9.ai',
-  description: 'Your Agentic Copilot, from Virtual to Real',
-  url: 'https://r6d9.ai', // origin must match your domain & subdomain
-  icons: ['https://assets.reown.com/reown-profile-pic.png']
-}
-
-// 3. Set the networks
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const networks = [mainnet] as any
-
-// 4. Create Wagmi Adapter
-const wagmiAdapter = new WagmiAdapter({
-  networks,
-  projectId,
-  ssr: false
-})
-
-// 5. Create modal
-createAppKit({
-  adapters: [wagmiAdapter],
-  networks,
-  projectId,
-  metadata,
-  features: {
-    email: false,
-    socials: false
-  }
-})
+//   return <></>
+// }
 
 export function AirdropLayout() {
+  const network = WalletAdapterNetwork.Mainnet
+  const endpoint = useMemo(() => clusterApiUrl(network), [network])
+  const wallets = useMemo(
+    () => {
+      const walletConnectConfig: WalletConnectWalletAdapterConfig = {
+        network: WalletAdapterNetwork.Mainnet,
+        options: { projectId: '6a2d318d7237d68546b0bbd72067083d' }
+      }
+
+      const wallets = [
+        new AlphaWalletAdapter(),
+        new AvanaWalletAdapter(),
+        new BitpieWalletAdapter(),
+        new CloverWalletAdapter(),
+        new Coin98WalletAdapter(),
+        new CoinbaseWalletAdapter(),
+        new CoinhubWalletAdapter(),
+        new FractalWalletAdapter(),
+        new HuobiWalletAdapter(),
+        new HyperPayWalletAdapter(),
+        new KeystoneWalletAdapter(),
+        new KrystalWalletAdapter(),
+        new LedgerWalletAdapter(),
+        new MathWalletAdapter(),
+        new NekoWalletAdapter(),
+        new NightlyWalletAdapter(),
+        new NufiWalletAdapter(),
+        new OntoWalletAdapter(),
+        new ParticleAdapter(),
+        new PhantomWalletAdapter(),
+        new SafePalWalletAdapter(),
+        new SaifuWalletAdapter(),
+        new SalmonWalletAdapter(),
+        new SkyWalletAdapter(),
+        new SolflareWalletAdapter(),
+        new SolongWalletAdapter(),
+        new SpotWalletAdapter(),
+        new TokenaryWalletAdapter(),
+        new TokenPocketWalletAdapter(),
+        new TorusWalletAdapter(),
+        new TrezorWalletAdapter(),
+        new TrustWalletAdapter(),
+        new WalletConnectWalletAdapter(walletConnectConfig),
+        new XDEFIWalletAdapter(),
+        new BitgetWalletAdapter()
+      ]
+      return wallets
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [network]
+  )
+
   return (
-    <WagmiProvider config={wagmiAdapter.wagmiConfig}>
-      <QueryClientProvider client={queryClient}>
-        <Outlet />
-      </QueryClientProvider>
-    </WagmiProvider>
+    <ConnectionProvider endpoint={endpoint}>
+      <WalletProvider wallets={wallets} autoConnect={false}>
+        <WalletModalProvider>
+          <Outlet></Outlet>
+        </WalletModalProvider>
+      </WalletProvider>
+    </ConnectionProvider>
   )
 }
