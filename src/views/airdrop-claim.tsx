@@ -9,6 +9,7 @@ import { IDL, Airdrop } from '@/contract/idl'
 import * as spl from '@solana/spl-token'
 import toast from 'react-hot-toast'
 import { Loader2 } from 'lucide-react'
+import { SolanaUIProvider } from '@/components/solana-ui-provider'
 
 function LinkSolAddress() {
   return (
@@ -156,7 +157,7 @@ function Steps(props: { step: 'connect-wallet' | 'link-solana' | 'claim-status' 
   )
 }
 
-export default function AirdropPage() {
+export function AirdropClaim() {
   const [step, setStep] = useState<'link-solana' | 'claim-status'>('link-solana')
 
   const { publicKey } = useWallet()
@@ -182,5 +183,13 @@ export default function AirdropPage() {
         {step === 'claim-status' && <ClaimAction />}
       </div>
     </div>
+  )
+}
+
+export default function AirdropClaimPage() {
+  return (
+    <SolanaUIProvider>
+      <AirdropClaim />
+    </SolanaUIProvider>
   )
 }

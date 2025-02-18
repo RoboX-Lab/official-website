@@ -8,6 +8,9 @@ import 'video-react/styles/scss/video-react.scss'
 
 import ReactGA from 'react-ga4'
 
+import { Buffer } from 'buffer'
+window.Buffer = Buffer
+
 const container = document.getElementById('root')
 if (!container) {
   throw new Error('root container not found')

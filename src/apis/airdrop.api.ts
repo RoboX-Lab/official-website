@@ -2,7 +2,7 @@ import { AxiosInstance } from 'axios'
 import request, { TResponse } from './request'
 
 interface TAirDropInfo {
-  id: number
+  register_flag: number
   address: `0x${string}`
   sol_address: string
 }
@@ -18,7 +18,7 @@ class AirdropApi {
   constructor(private request: AxiosInstance) {}
 
   async getAirdropInfo(address: string) {
-    const res = await this.request.post<TResponse<TAirDropInfo | null>>('/ad/account/info', { user_id: address })
+    const res = await this.request.post<TResponse<TAirDropInfo>>('/ad/account/info', { user_id: address })
     return res.data
   }
 

@@ -39,11 +39,9 @@ import {
   BitgetWalletAdapter,
   WalletConnectWalletAdapterConfig
 } from '@solana/wallet-adapter-wallets'
-import { WalletModalProvider, WalletMultiButton } from '@solana/wallet-adapter-react-ui'
+import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
 import { useMemo } from 'react'
 import '@solana/wallet-adapter-react-ui/styles.css'
-import { Outlet } from 'react-router-dom'
-
 // function SolanaWalletConnect() {
 //   const { wallet } = useWallet()
 
@@ -58,7 +56,8 @@ import { Outlet } from 'react-router-dom'
 //   return <></>
 // }
 
-export function AirdropLayout() {
+export function SolanaUIProvider(props: { children: React.ReactNode }) {
+  const { children } = props
   const network = WalletAdapterNetwork.Mainnet
   const endpoint = useMemo(() => clusterApiUrl(network), [network])
   const wallets = useMemo(
@@ -114,9 +113,7 @@ export function AirdropLayout() {
   return (
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={wallets} autoConnect={false}>
-        <WalletModalProvider>
-          <Outlet></Outlet>
-        </WalletModalProvider>
+        <WalletModalProvider>{children}</WalletModalProvider>
       </WalletProvider>
     </ConnectionProvider>
   )
