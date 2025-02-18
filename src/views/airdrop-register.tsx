@@ -126,7 +126,7 @@ function Steps(props: { step: 'connect-wallet' | 'link-solana' | 'claim-status' 
       <div
         className={`${step === 'claim-status' ? 'rounded-l-sm bg-white text-black' : 'text-white'} relative basis-1/3 py-1 text-center transition-all`}
       >
-        Claim $Pengu
+        Claim $R6D9
       </div>
     </div>
   )
